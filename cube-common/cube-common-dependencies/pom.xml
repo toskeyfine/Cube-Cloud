@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>group.springframework</groupId>
+        <artifactId>spring-cloud-dependencies-parent</artifactId>
+        <version>2024.0.0</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.toskey</groupId>
+    <artifactId>cube-common-dependencies</artifactId>
+    <version>1.0.0</version>
+
+    <packaging>pom</packaging>
+
+    <name>cube-common-dependencies</name>
+    <description>cube-cloud dependencies manager module</description>
+    <url>http://www.toskey.com</url>
+
+    <properties>
+        <cube-cloud.version>1.0.0</cube-cloud.version>
+
+        <mybatis-plus.version>3.5.5</mybatis-plus.version>
+        <dynamic-datesource.version>4.3.0</dynamic-datesource.version>
+        <druid.version>1.2.20</druid.version>
+        <redisson.version>3.23.3</redisson.version>
+        <javers.version>7.3.3</javers.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-common-core</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-common-cache</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-common-data</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-common-datascope</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-common-excel</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-common-log</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-common-pay</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-common-tenant</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-common-security</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-common-resource-server</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-sas-interface</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-config-interface</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!--mybatis-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.mybatis</groupId>
+                        <artifactId>mybatis-spring</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>3.0.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-3-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.jsqlparser</groupId>
+                <artifactId>jsqlparser</artifactId>
+                <version>4.9</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

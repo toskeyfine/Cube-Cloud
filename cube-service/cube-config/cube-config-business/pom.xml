@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.toskey</groupId>
+        <artifactId>cube-config</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>cube-config-business</artifactId>
+
+    <name>cube-config-business</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.toskey</groupId>
+            <artifactId>cube-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.toskey</groupId>
+            <artifactId>cube-common-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.toskey</groupId>
+            <artifactId>cube-common-data</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.toskey</groupId>
+            <artifactId>cube-common-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.toskey</groupId>
+            <artifactId>cube-common-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.toskey</groupId>
+            <artifactId>cube-config-interface</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-3-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+        </dependency>
+    </dependencies>
+</project>
