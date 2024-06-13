@@ -3,8 +3,6 @@ package com.toskey.cube.service.sas.business.domain.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.toskey.cube.common.data.entity.DataEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.List;

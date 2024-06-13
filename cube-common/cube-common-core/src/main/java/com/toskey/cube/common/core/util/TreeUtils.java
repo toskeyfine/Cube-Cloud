@@ -27,7 +27,7 @@ public class TreeUtils {
      *
      * @return tree node list
      */
-    public <T> List<T> buildTree(List<T> list, Function<T, ?> key, Function<T, ?> treeConnectKey,
+    public static <T> List<T> buildTree(List<T> list, Function<T, ?> key, Function<T, ?> treeConnectKey,
                                  Function<T, Collection<T>> children, Consumers<T, T> consumer) {
         List<T> tree = new ArrayList<>();
         for (var node : list) {
@@ -64,7 +64,7 @@ public class TreeUtils {
      *
      * @code List tree = TreeUtils.buildTree(menuList, Menu::getKey, Menu::getParentKey, "0", Menu::getSortNum, Menu::SetChildren)
      */
-    public <T> List<T> buildTreeByStream(List<T> list, Function<T, ?> key, Function<T, ?> treeConnectKey, String rootPId,
+    public static <T> List<T> buildTree(List<T> list, Function<T, ?> key, Function<T, ?> treeConnectKey, String rootPId,
                                          Function<T, ? extends Comparable> treeSortKey, Consumers<T, T> consumer) {
         if (CollectionUtils.isEmpty(list)) {
             return Collections.emptyList();

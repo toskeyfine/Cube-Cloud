@@ -12,6 +12,7 @@ import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
 import net.sf.jsqlparser.expression.operators.relational.EqualsTo;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
+import net.sf.jsqlparser.statement.select.FromItem;
 import net.sf.jsqlparser.statement.select.PlainSelect;
 import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.select.SetOperationList;
@@ -52,15 +53,11 @@ public class TenantMybatisInterceptor extends JsqlParserSupport implements Inner
 
     @Override
     protected void processSelect(Select select, int index, String sql, Object obj) {
-        PlainSelect plainSelect = select.getPlainSelect();
-        if (plainSelect != null) {
+        if (select instanceof PlainSelect plainSelect) {
             this.setWhere(plainSelect, (String) obj);
-        } else {
-            SetOperationList setOperationList = select.getSetOperationList();
-            if (setOperationList != null) {
-                List<Select> selectBodyList = setOperationList.getSelects();
-                selectBodyList.forEach(s -> this.setWhere((PlainSelect) s, (String) obj));
-            }
+        } else if (select instanceof SetOperationList setOperationList) {
+            List<Select> selectBodyList = setOperationList.getSelects();
+            selectBodyList.forEach(s -> this.setWhere((PlainSelect) s, (String) obj));
         }
     }
 
@@ -77,9 +74,13 @@ public class TenantMybatisInterceptor extends JsqlParserSupport implements Inner
         if (where == null) {
             where = new HexValue(" 1 = 1 ");
         }
-        Table fromTable = (Table) plainSelect.getFromItem();
-        Alias fromAlias = fromTable.getAlias();
-        String mainTableName = fromAlias == null ? fromTable.getName() : fromAlias.getName();
+        String mainTableName = null;
+        FromItem fromItem = plainSelect.getFromItem();
+        if (fromItem instanceof Table table) {
+            mainTableName = table.getName() != null ? table.getName() : table.getAlias().getName();
+        } else {
+            mainTableName = fromItem.getAlias().getName();
+        }
 
         String className = whereSegment.substring(0, whereSegment.lastIndexOf("."));
         String methodName = whereSegment.substring(whereSegment.lastIndexOf(".") + 1);

@@ -27,7 +27,7 @@ public class TenantContextFilter extends GenericFilterBean implements OrderedFil
     }
 
     private void setTenantContext(ServletRequest servletRequest) {
-        String headerValue = ((HttpServletRequest) servletRequest).getHeader("TENANT-ID");
+        String headerValue = ((HttpServletRequest) servletRequest).getHeader("X-TENANT-ID");
         if (StringUtils.isNotBlank(headerValue)) {
             TenantContextHolder.setContext(TenantContext.of(headerValue));
         } else {

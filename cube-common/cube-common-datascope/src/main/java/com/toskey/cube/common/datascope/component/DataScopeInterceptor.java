@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
 import lombok.RequiredArgsConstructor;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.HexValue;
+import net.sf.jsqlparser.schema.Table;
+import net.sf.jsqlparser.statement.select.FromItem;
 import net.sf.jsqlparser.statement.select.PlainSelect;
 import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.select.SetOperationList;
@@ -51,15 +53,11 @@ public class DataScopeInterceptor extends JsqlParserSupport implements InnerInte
 
     @Override
     protected void processSelect(Select select, int index, String sql, Object obj) {
-        PlainSelect plainSelect = select.getPlainSelect();
-        if (plainSelect != null) {
+        if (select instanceof PlainSelect plainSelect) {
             this.setWhere(plainSelect, (String) obj);
-        } else {
-            SetOperationList setOperationList = select.getSetOperationList();
-            if (setOperationList != null) {
-                List<Select> selectBodyList = setOperationList.getSelects();
-                selectBodyList.forEach(s -> this.setWhere((PlainSelect) s, (String) obj));
-            }
+        } else if (select instanceof SetOperationList setOperationList) {
+            List<Select> selectBodyList = setOperationList.getSelects();
+            selectBodyList.forEach(s -> this.setWhere((PlainSelect) s, (String) obj));
         }
     }
 
@@ -72,6 +70,13 @@ public class DataScopeInterceptor extends JsqlParserSupport implements InnerInte
         Expression where = select.getWhere();
         if (where == null) {
             where = new HexValue(EMPTY_WHERE_JOIN);
+        }
+        String mainTableName = null;
+        FromItem fromItem = select.getFromItem();
+        if (fromItem instanceof Table table) {
+            mainTableName = table.getName() != null ? table.getName() : table.getAlias().getName();
+        } else {
+            mainTableName = fromItem.getAlias().getName();
         }
         return where;
     }

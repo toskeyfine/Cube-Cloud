@@ -1,5 +1,10 @@
 package com.toskey.cube.common.core.util;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * StringUtils
  *
@@ -9,6 +14,8 @@ package com.toskey.cube.common.core.util;
  * @date 2024/6/12 15:34
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
+
+    private static final List<Character> ESCAPE_CHAR = Arrays.asList(new Character[]{'$', '(', ')', '*', '+', '.', '[', ']', '?', '\\', '^', '{', '}', '|'});
 
     /**
      * 下划线
@@ -52,6 +59,24 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         }
 
         return sb.toString();
+    }
+
+    public static String escape(String str) {
+        if (StringUtils.isBlank(str)) {
+            return str;
+        }
+
+        final StringBuilder builder = new StringBuilder();
+        int len = str.length();
+        char current;
+        for (int i = 0; i < len; i++) {
+            current = str.charAt(i);
+            if (ESCAPE_CHAR.contains(current)) {
+                builder.append('\\');
+            }
+            builder.append(current);
+        }
+        return builder.toString();
     }
 
     public static String toUpperCase(String src, int index) {

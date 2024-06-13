@@ -25,6 +25,10 @@ public final class RestResult<T> implements Serializable {
 
     private RestResult() {}
 
+    public boolean isSuccess() {
+        return this.code == RestResultCode.SUCCESS.getCode();
+    }
+
     public static <T> RestResult<T> success() {
         return RestResult.of(RestResultCode.SUCCESS);
     }

@@ -26,4 +26,10 @@ public interface CommonConstants {
 
     String USER_STATUS_NORMAL = "1";
 
+    String TREE_ROOT_DEFAULT_PARENT_KEY = "-1";
+
+    String DATA_STATUS_ENABLED = "1";
+
+    String DATA_STATUS_DISABLED = "0";
+
 }

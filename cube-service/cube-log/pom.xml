@@ -10,10 +10,16 @@
     </parent>
 
     <artifactId>cube-log</artifactId>
+    <packaging>pom</packaging>
 
     <name>cube-log</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
+    <modules>
+        <module>cube-log-business</module>
+        <module>cube-log-interface</module>
+        <module>cube-log-portal</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

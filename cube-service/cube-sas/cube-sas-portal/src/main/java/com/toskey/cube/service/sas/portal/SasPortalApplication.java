@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @description TODO
  * @date 2024/6/7 15:57
  */
-@MapperScan(basePackages = "com.toskey.cube.service.*")
+@MapperScan(basePackages = "com.toskey.cube.service.sas.business.domain.mapper")
 @SpringBootApplication(scanBasePackages = "com.toskey.cube")
 public class SasPortalApplication {
 

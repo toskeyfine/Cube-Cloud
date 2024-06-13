@@ -4,12 +4,14 @@ import com.toskey.cube.common.resource.server.component.CubeAccessDeniedHandler;
 import com.toskey.cube.common.resource.server.component.CubeBearerTokenResolver;
 import com.toskey.cube.common.resource.server.component.ResourceServerExceptionEntryPoint;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * ResourceServerConfiguration
@@ -20,6 +22,7 @@ import org.springframework.security.web.SecurityFilterChain;
  * @date 2024/6/6 17:23
  */
 @RequiredArgsConstructor
+@EnableConfigurationProperties(AuthIgnoreProperties.class)
 public class ResourceServerSecurityConfiguration {
 
     private final CubeAccessDeniedHandler accessDeniedHandler;
@@ -31,14 +34,25 @@ public class ResourceServerSecurityConfiguration {
     private final ResourceServerExceptionEntryPoint resourceServerExceptionEntryPoint;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.oauth2ResourceServer(resourceServer ->
-                resourceServer.accessDeniedHandler(accessDeniedHandler)
-                        .bearerTokenResolver(bearerTokenResolver)
-                        .authenticationEntryPoint(resourceServerExceptionEntryPoint)
-                        .opaqueToken(opaqueToken ->
-                                opaqueToken.introspector(opaqueTokenIntrospector)
-                        )
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthIgnoreProperties ignoreProperties) throws Exception {
+        http.authorizeHttpRequests(requests ->
+                        requests.requestMatchers(
+                                        ignoreProperties.getIgnoreUrls()
+                                                .stream()
+                                                .map(AntPathRequestMatcher::new)
+                                                .toArray(AntPathRequestMatcher[]::new)
+                                )
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated()
+                )
+                .oauth2ResourceServer(resourceServer ->
+                        resourceServer.accessDeniedHandler(accessDeniedHandler)
+                                .bearerTokenResolver(bearerTokenResolver)
+                                .authenticationEntryPoint(resourceServerExceptionEntryPoint)
+                                .opaqueToken(opaqueToken ->
+                                        opaqueToken.introspector(opaqueTokenIntrospector)
+                                )
                 )
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .csrf(AbstractHttpConfigurer::disable);

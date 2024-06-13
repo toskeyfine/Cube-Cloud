@@ -3,7 +3,9 @@ package com.toskey.cube.common.resource.server.config;
 import com.toskey.cube.common.resource.server.component.CubePasswordUserDetailsServiceImpl;
 import com.toskey.cube.common.resource.server.component.CubeSmsUserDetailsServiceImpl;
 import com.toskey.cube.common.resource.server.component.CubeUserDetailsService;
+import com.toskey.cube.service.sas.interfaces.service.RemoteUserService;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * SecurityAutoConfiguration
@@ -16,8 +18,9 @@ import org.springframework.context.annotation.Bean;
 public class SecurityAutoConfiguration {
 
     @Bean
-    public CubeUserDetailsService passwordUserDetailsService() {
-        return new CubePasswordUserDetailsServiceImpl();
+    public CubeUserDetailsService passwordUserDetailsService(RedisTemplate<String, Object> redisTemplate,
+                                                             RemoteUserService remoteUserService) {
+        return new CubePasswordUserDetailsServiceImpl(redisTemplate, remoteUserService);
     }
 
     @Bean

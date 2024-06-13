@@ -17,7 +17,6 @@ import org.springframework.security.oauth2.server.resource.introspection.OpaqueT
  * @description TODO
  * @date 2024/6/6 17:23
  */
-@EnableConfigurationProperties(AuthIgnoreProperties.class)
 public class ResourceServerAutoConfiguration {
 
     @Bean
