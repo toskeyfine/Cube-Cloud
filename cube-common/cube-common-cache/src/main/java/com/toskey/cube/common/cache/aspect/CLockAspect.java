@@ -17,10 +17,8 @@ import java.lang.reflect.Method;
 /**
  * 分布式锁注解切片
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/5/31 16:59
+ * @author toskey
+ * @version 1.0.0
  */
 @Aspect
 @RequiredArgsConstructor

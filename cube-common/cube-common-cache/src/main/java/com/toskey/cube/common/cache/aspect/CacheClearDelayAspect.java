@@ -19,8 +19,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * redis缓存延迟双删AOP实现
  *
- * @author lis
- * @date 2023/2/23 15:33
+ * @author toskey
+ * @version 1.0.0
  */
 @Aspect
 @RequiredArgsConstructor

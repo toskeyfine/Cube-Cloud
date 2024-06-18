@@ -9,8 +9,8 @@ import java.lang.annotation.*;
 /**
  * 启用redisson分布式锁注解
  *
- * @author lish
- * @date 2023/10/24 10:45
+ * @author toskey
+ * @version 1.0.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

@@ -6,10 +6,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * CLock
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/5/31 16:53
+ * @author toskey
+ * @version 1.0.0
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * redis缓存延迟双删注解
  *
- * @author lis
- * @date 2023/2/23 15:20
+ * @author toskey
+ * @version 1.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
