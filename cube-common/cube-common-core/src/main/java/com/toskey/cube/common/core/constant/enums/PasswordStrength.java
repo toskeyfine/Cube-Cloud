@@ -3,10 +3,8 @@ package com.toskey.cube.common.core.constant.enums;
 /**
  * PasswordStrength
  *
- * @author lis
+ * @author toskey
  * @version 1.0
- * @description TODO
- * @date 2024/6/12 16:27
  */
 public enum PasswordStrength {
 

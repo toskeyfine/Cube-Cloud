@@ -1,10 +1,7 @@
 package com.toskey.cube.service.log.business.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.toskey.common.tenant.entity.TenantEntity;
-import com.toskey.cube.common.core.base.BaseEntity;
-
-import java.time.LocalDateTime;
+import com.toskey.cube.common.tenant.entity.TenantEntity;
 
 /**
  * OperationLog

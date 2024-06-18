@@ -23,7 +23,6 @@ import java.time.format.DateTimeFormatter;
  *
  * @author toskey
  * @version 1.0
- * @since 2024/6/5
  */
 public class JavaTimeModule extends SimpleModule {
 

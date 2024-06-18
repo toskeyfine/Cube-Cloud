@@ -46,6 +46,8 @@ public class OperationLogDTO extends BaseEntityMapper {
 
     private LocalDateTime createTime;
 
+    private String tenantId;
+
     public String getId() {
         return id;
     }
@@ -164,5 +166,13 @@ public class OperationLogDTO extends BaseEntityMapper {
 
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+    }
+
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 }

@@ -3,10 +3,8 @@ package com.toskey.cube.common.core.constant;
 /**
  * ServiceNameConstants
  *
- * @author lis
+ * @author toskey
  * @version 1.0
- * @description TODO
- * @date 2024/6/13 15:40
  */
 public interface ServiceNameConstants {
 

@@ -6,10 +6,8 @@ import java.util.List;
 /**
  * PageData
  *
- * @author lis
+ * @author toskey
  * @version 1.0
- * @description TODO
- * @date 2024/6/12 15:42
  */
 public class PageData<T> implements Serializable {
 

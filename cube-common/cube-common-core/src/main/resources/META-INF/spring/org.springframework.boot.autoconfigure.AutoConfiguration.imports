@@ -1,3 +1,4 @@
 com.toskey.cube.common.core.util.SpringContextHolder
 com.toskey.cube.common.core.config.JacksonConfiguration
 com.toskey.cube.common.core.config.RestTemplateConfiguration
+com.toskey.cube.common.core.config.AsyncTaskPoolConfiguration

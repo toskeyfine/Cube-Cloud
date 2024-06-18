@@ -24,8 +24,14 @@
         <module>cube-common-dependencies</module>
         <module>cube-common-tenant</module>
         <module>cube-common-security</module>
+        <module>cube-common-resource-server</module>
         <module>cube-common-pay</module>
         <module>cube-common-excel</module>
         <module>cube-common-data</module>
+        <module>cube-common-sms</module>
+        <module>cube-common-mail</module>
+        <module>cube-common-job</module>
+        <module>cube-common-license</module>
+        <module>cube-common-sentinel</module>
     </modules>
 </project>

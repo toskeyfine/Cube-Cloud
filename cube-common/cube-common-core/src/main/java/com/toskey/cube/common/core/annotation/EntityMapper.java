@@ -7,10 +7,8 @@ import java.lang.annotation.*;
 /**
  * EntityMapper
  *
- * @author lis
+ * @author toskey
  * @version 1.0
- * @description TODO
- * @date 2024/6/12 15:31
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

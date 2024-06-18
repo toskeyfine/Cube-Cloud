@@ -13,7 +13,6 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
  *
  * @author toskey
  * @version 1.0
- * @since 2024/6/5
  */
 public final class SpelParser {
 

@@ -1,8 +1,6 @@
 package com.toskey.cube.common.core.base;
 
 import com.toskey.cube.common.core.constant.enums.RestResultCode;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 import java.io.Serializable;
 
@@ -11,10 +9,7 @@ import java.io.Serializable;
  *
  * @version 1.0.0
  * @author toskey
- * @since 2024/6/5
  */
-@Getter
-@AllArgsConstructor(staticName = "of")
 public final class RestResult<T> implements Serializable {
 
     private int code;
@@ -24,6 +19,30 @@ public final class RestResult<T> implements Serializable {
     private T data;
 
     private RestResult() {}
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
 
     public boolean isSuccess() {
         return this.code == RestResultCode.SUCCESS.getCode();
@@ -49,12 +68,24 @@ public final class RestResult<T> implements Serializable {
         return RestResult.of(RestResultCode.SUCCESS.getCode(), msg, data);
     }
 
+    public static <T> RestResult<T> failure(String msg) {
+        return RestResult.of(RestResultCode.FAILURE.getCode(), msg);
+    }
+
     public static <T> RestResult<T> failure(T data) {
         return RestResult.of(RestResultCode.SUCCESS, data);
     }
 
+    public static <T> RestResult<T> of(int code) {
+        return RestResult.of(code, null, null);
+    }
+
     public static <T> RestResult<T> of(int code, String msg) {
         return RestResult.of(code, msg, null);
+    }
+
+    public static <T> RestResult<T> of(int code, String msg, T data) {
+        return RestResult.of(code, msg, data);
     }
 
     public static <T> RestResult<T> of(RestResultCode restResultCode) {

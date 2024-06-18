@@ -28,8 +28,7 @@
         </dependency>
         <dependency>
             <groupId>com.toskey</groupId>
-            <artifactId>cube-common-resource-server</artifactId>
-            <optional>true</optional>
+            <artifactId>cube-common-security</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>

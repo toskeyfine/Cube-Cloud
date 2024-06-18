@@ -3,10 +3,8 @@ package com.toskey.cube.common.core.constant;
 /**
  * DateTimeConstants
  *
- * @author lis
+ * @author toskey
  * @version 1.0
- * @description TODO
- * @date 2024/6/5 17:48
  */
 public interface DateTimeConstants {
 

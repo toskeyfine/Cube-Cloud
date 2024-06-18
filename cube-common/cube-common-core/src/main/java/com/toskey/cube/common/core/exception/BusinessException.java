@@ -7,7 +7,6 @@ import lombok.Getter;
  *
  * @author toskey
  * @version 1.0
- * @since 2024/6/5
  */
 public class BusinessException extends RuntimeException {
 

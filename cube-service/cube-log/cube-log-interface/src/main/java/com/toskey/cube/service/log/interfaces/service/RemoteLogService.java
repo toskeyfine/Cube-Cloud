@@ -20,13 +20,18 @@ import org.springframework.web.bind.annotation.RequestHeader;
  * @description TODO
  * @date 2024/6/13 17:12
  */
-@FeignClient(contextId = "remoteLogService", name = ServiceNameConstants.SERVICE_LOG, fallbackFactory = RemoteLogServiceFallbackFactory.class)
+@FeignClient(
+        contextId = "remoteLogService",
+        name = ServiceNameConstants.SERVICE_LOG,
+        path = CommonConstants.FEIGN_SERVICE_PATH_PREFIX,
+        fallbackFactory = RemoteLogServiceFallbackFactory.class
+)
 public interface RemoteLogService {
 
-    @PostMapping(CommonConstants.FEIGN_SERVICE_PATH_PREFIX + "/log/operation")
-    RestResult<Boolean> saveOperationLog(@RequestBody OperationLogDTO operationLogDTO, @RequestHeader(SecurityConstants.HEADER_SERVICE) String serviceHeader);
+    @PostMapping("/log/operation")
+    RestResult<Boolean> saveOperationLog(@RequestBody OperationLogDTO operationLogDTO);
 
-    @PostMapping(CommonConstants.FEIGN_SERVICE_PATH_PREFIX + "/log/login")
-    RestResult<Boolean> saveLoginLog(@RequestBody LoginLogDTO loginLogDTO, @RequestHeader(SecurityConstants.HEADER_SERVICE) String serviceHeader);
+    @PostMapping("/log/login")
+    RestResult<Boolean> saveLoginLog(@RequestBody LoginLogDTO loginLogDTO);
 
 }

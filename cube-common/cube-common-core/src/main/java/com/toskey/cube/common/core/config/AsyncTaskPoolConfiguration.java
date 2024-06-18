@@ -13,10 +13,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * AsyncTaskPoolConfiguration
  *
- * @author lis
+ * @author toskey
  * @version 1.0
- * @description TODO
- * @date 2024/6/7 10:29
  */
 @Slf4j
 @EnableConfigurationProperties(AsyncTaskPoolProperties.class)

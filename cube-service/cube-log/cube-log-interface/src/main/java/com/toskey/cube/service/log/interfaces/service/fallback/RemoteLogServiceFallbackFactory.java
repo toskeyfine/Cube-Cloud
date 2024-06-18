@@ -19,12 +19,12 @@ public class RemoteLogServiceFallbackFactory implements FallbackFactory<RemoteLo
     public RemoteLogService create(Throwable cause) {
         return new RemoteLogService() {
             @Override
-            public RestResult<Boolean> saveOperationLog(OperationLogDTO operationLogDTO, String serviceHeader) {
+            public RestResult<Boolean> saveOperationLog(OperationLogDTO operationLogDTO) {
                 return null;
             }
 
             @Override
-            public RestResult<Boolean> saveLoginLog(LoginLogDTO loginLogDTO, String serviceHeader) {
+            public RestResult<Boolean> saveLoginLog(LoginLogDTO loginLogDTO) {
                 return null;
             }
         };

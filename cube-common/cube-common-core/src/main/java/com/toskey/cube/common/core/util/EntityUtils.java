@@ -10,9 +10,10 @@ import org.springframework.beans.BeanUtils;
 import java.util.List;
 
 /**
- * @description: 实体类型转换工具
- * @author: zxicet
- * @create: 2023-06-27 17:43
+ * EntityUtils
+ *
+ * @author toskey
+ * @version 1.0
  */
 @UtilityClass
 public class EntityUtils {

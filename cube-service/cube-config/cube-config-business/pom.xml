@@ -40,7 +40,7 @@
         </dependency>
         <dependency>
             <groupId>com.toskey</groupId>
-            <artifactId>cube-common-security</artifactId>
+            <artifactId>cube-common-resource-server</artifactId>
         </dependency>
         <dependency>
             <groupId>com.toskey</groupId>

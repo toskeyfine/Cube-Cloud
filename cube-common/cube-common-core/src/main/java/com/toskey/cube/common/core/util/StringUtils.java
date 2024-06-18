@@ -8,10 +8,8 @@ import java.util.Set;
 /**
  * StringUtils
  *
- * @author lis
+ * @author toskey
  * @version 1.0
- * @description TODO
- * @date 2024/6/12 15:34
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
 

@@ -37,7 +37,7 @@ public class LoginLogDTO extends BaseEntityMapper {
      * 20002.强制
      * 20003.超时
      */
-    private String loginType;
+    private String grantType;
 
     /**
      * 请求客户端IP
@@ -57,6 +57,8 @@ public class LoginLogDTO extends BaseEntityMapper {
 
     private LocalDateTime createTime;
 
+    private String tenantId;
+
     public String getId() {
         return id;
     }
@@ -73,12 +75,12 @@ public class LoginLogDTO extends BaseEntityMapper {
         this.type = type;
     }
 
-    public String getLoginType() {
-        return loginType;
+    public String getGrantType() {
+        return grantType;
     }
 
-    public void setLoginType(String loginType) {
-        this.loginType = loginType;
+    public void setGrantType(String grantType) {
+        this.grantType = grantType;
     }
 
     public String getClientIp() {
@@ -119,5 +121,13 @@ public class LoginLogDTO extends BaseEntityMapper {
 
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+    }
+
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 }

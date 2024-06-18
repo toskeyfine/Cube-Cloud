@@ -1,12 +1,10 @@
 package com.toskey.cube.common.core.constant;
 
 /**
- * CommonConstats
+ * CommonConstants
  *
- * @author lis
+ * @author toskey
  * @version 1.0
- * @description TODO
- * @date 2024/6/5 17:02
  */
 public interface CommonConstants {
 
@@ -32,4 +30,5 @@ public interface CommonConstants {
 
     String DATA_STATUS_DISABLED = "0";
 
+    String CAPTCHA_DEFAULT_TYPE = "blockPuzzle";
 }

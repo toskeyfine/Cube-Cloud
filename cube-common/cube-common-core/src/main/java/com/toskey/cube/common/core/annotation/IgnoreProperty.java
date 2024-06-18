@@ -8,10 +8,8 @@ import java.lang.annotation.Target;
 /**
  * IgnoreProperty
  *
- * @author lis
+ * @author toskey
  * @version 1.0
- * @description TODO
- * @date 2024/6/11 10:28
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
