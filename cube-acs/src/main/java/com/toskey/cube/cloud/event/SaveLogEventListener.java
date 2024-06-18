@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 /**
  * 登录日志存储监听器
  *
- * @author lis
- * @date 2023/5/9 13:40
+ * @author toskey
+ * @version 1.0.0
  */
 @Component
 public class SaveLogEventListener {

@@ -9,7 +9,7 @@ import java.util.Map;
  * Token响应封装
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 public class TokenWrapper {
 

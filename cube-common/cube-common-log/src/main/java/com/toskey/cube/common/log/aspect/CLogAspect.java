@@ -27,10 +27,8 @@ import java.util.regex.Pattern;
 /**
  * CLogAspect
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/14 9:47
+ * @author toskey
+ * @version 1.0.0
  */
 @Aspect
 public class CLogAspect {
@@ -71,7 +69,7 @@ public class CLogAspect {
         try {
             obj = point.proceed();
         } catch (Exception e) {
-            operationLogDTO.setLogType(LogResultType.ERROR.getType());
+            operationLogDTO.setLogType(LogResultType.ERROR.getValue());
             operationLogDTO.setExMsg(e.getMessage());
             throw e;
         } finally {
@@ -92,7 +90,7 @@ public class CLogAspect {
         log.setContent(content);
         log.setModule(module);
         log.setCreateBy(StringUtils.isNotBlank(SecurityUtils.getUserId()) ? SecurityUtils.getUserId() : "anonymous");
-        log.setLogType(LogResultType.NORMAL.getType());
+        log.setLogType(LogResultType.NORMAL.getValue());
         log.setRequestRemoteHost(WebUtils.getIP(request));
         log.setRequestUri(request.getRequestURI());
         log.setRequestMethod(request.getMethod());

@@ -3,10 +3,8 @@ package com.toskey.cube.common.log.enums;
 /**
  * LoginLogType
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/14 10:55
+ * @author toskey
+ * @version 1.0.0
  */
 public enum LoginLogType {
 

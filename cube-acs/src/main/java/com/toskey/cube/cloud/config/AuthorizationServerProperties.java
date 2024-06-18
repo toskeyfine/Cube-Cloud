@@ -8,10 +8,8 @@ import java.util.List;
 /**
  * AuthorizationServerProperties
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/14 10:34
+ * @author toskey
+ * @version 1.0.0
  */
 @ConfigurationProperties("cube.authorization.server")
 public class AuthorizationServerProperties {

@@ -11,10 +11,8 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 /**
  * OAuth2AuthenticationProviderUtils
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 10:50
+ * @author toskey
+ * @version 1.0.0
  */
 public class OAuth2AuthenticationProviderUtils {
 

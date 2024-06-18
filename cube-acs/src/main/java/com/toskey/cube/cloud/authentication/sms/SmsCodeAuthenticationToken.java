@@ -10,10 +10,8 @@ import java.util.Set;
 /**
  * SmsCodeAuthenticationToken
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 10:07
+ * @author toskey
+ * @version 1.0.0
  */
 public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
 

@@ -11,10 +11,8 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 /**
  * FormAuthenticationSuccessHandler
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/14 10:35
+ * @author toskey
+ * @version 1.0.0
  */
 public class FormAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 

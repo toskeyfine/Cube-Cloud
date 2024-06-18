@@ -1,13 +1,10 @@
 package com.toskey.cube.common.log.enums;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 /**
  * 日志类型枚举
  *
- * @author lis
- * @date 2023/6/13 16:52
+ * @author toskey
+ * @version 1.0.0
  */
 public enum LogResultType {
 

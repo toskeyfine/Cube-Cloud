@@ -32,7 +32,7 @@ import org.springframework.util.Assert;
  * 实现短信验证码校验
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 public class UserDetailsAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 

@@ -22,7 +22,7 @@ import java.util.UUID;
  * 重写OAuth2TokenGenerator, 将accessToken改为UUID
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  * @see org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator
  */
 public class AccessTokenGenerator implements OAuth2TokenGenerator<OAuth2AccessToken> {

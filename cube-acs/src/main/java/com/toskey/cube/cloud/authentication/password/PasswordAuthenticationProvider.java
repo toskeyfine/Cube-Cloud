@@ -33,7 +33,7 @@ import java.util.Set;
  * </p>
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 public class PasswordAuthenticationProvider implements AuthenticationProvider {
 
@@ -78,8 +78,6 @@ public class PasswordAuthenticationProvider implements AuthenticationProvider {
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(passwordAuthenticationToken.getUsername(), passwordAuthenticationToken.getPassword());
         Authentication passwordAuthentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-        RedisAuthorizationService mAuthorizationService = (RedisAuthorizationService) authorizationService;
-        mAuthorizationService.removeByUsername(passwordAuthentication.getName());
 
         // 构建token
         // @formatter:off

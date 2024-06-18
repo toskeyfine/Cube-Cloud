@@ -31,10 +31,8 @@ import java.util.Set;
 /**
  * SmsCodeAuthenticationProvider
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/17 13:50
+ * @author toskey
+ * @version 1.0.0
  */
 public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
     private final Log logger = LogFactory.getLog(getClass());

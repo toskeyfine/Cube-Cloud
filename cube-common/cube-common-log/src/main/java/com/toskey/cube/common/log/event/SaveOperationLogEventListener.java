@@ -9,8 +9,8 @@ import org.springframework.scheduling.annotation.Async;
 /**
  * 操作日志存储事件监听器
  *
- * @author lis
- * @date 2023/5/9 13:40
+ * @author toskey
+ * @version 1.0.0
  */
 @RequiredArgsConstructor
 public class SaveOperationLogEventListener {

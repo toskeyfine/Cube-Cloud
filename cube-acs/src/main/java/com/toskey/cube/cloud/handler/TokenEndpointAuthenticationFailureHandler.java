@@ -29,10 +29,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * TokenEndpointAuthenticationFailureHandler
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/14 10:35
+ * @author toskey
+ * @version 1.0.0
  */
 @Component
 public class TokenEndpointAuthenticationFailureHandler implements AuthenticationFailureHandler {

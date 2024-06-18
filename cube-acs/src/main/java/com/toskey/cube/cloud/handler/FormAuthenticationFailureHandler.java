@@ -20,7 +20,7 @@ import java.nio.charset.StandardCharsets;
  * 表单认证失败处理
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 @Component
 public class FormAuthenticationFailureHandler implements AuthenticationFailureHandler {

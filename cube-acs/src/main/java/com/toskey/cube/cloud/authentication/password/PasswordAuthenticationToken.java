@@ -10,10 +10,8 @@ import java.util.Set;
 /**
  * PasswordAuthenticationToken
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 9:59
+ * @author toskey
+ * @version 1.0.0
  */
 public class PasswordAuthenticationToken extends AbstractAuthenticationToken {
 

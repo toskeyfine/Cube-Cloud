@@ -9,8 +9,8 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 /**
  * TokenCustomizer
  *
- * @author lis
- * @version 1.0
+ * @author toskey
+ * @version 1.0.0
  */
 public class TokenCustomizer implements OAuth2TokenCustomizer<OAuth2TokenClaimsContext> {
     @Override

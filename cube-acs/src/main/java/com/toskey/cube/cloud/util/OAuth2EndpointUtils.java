@@ -19,7 +19,7 @@ import java.util.Map;
  * OAuth2EndpointUtils
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  * @see org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2EndpointUtils
  */
 public final class OAuth2EndpointUtils {

@@ -7,8 +7,8 @@ import lombok.Getter;
 /**
  * 操作日志存储事件
  *
- * @author lis
- * @date 2023/5/9 13:39
+ * @author toskey
+ * @version 1.0.0
  */
 @AllArgsConstructor
 public class SaveOperationLogEvent {

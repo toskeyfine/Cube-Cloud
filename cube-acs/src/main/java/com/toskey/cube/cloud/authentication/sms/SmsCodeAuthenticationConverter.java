@@ -20,7 +20,7 @@ import java.util.*;
  * </p>
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 public class SmsCodeAuthenticationConverter implements AuthenticationConverter {
     @Override

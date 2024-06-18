@@ -19,7 +19,7 @@ import java.io.IOException;
  * ClientAuthenticationFailureHandler
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 @Component
 public class ClientAuthenticationFailureHandler implements AuthenticationFailureHandler {
