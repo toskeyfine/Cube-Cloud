@@ -10,15 +10,36 @@
     </parent>
 
     <artifactId>cube-common-security</artifactId>
-    <packaging>pom</packaging>
 
     <name>cube-common-security</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.toskey.com</url>
 
-    <modules>
-        <module>cube-common-resource-server</module>
-        <module>cube-common-oauth2-client</module>
-    </modules>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.toskey</groupId>
+            <artifactId>cube-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.toskey</groupId>
+            <artifactId>cube-common-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-authorization-server</artifactId>
+            <version>${spring-security-authorization-server.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.toskey</groupId>
+            <artifactId>cube-sas-interface</artifactId>
+        </dependency>
+    </dependencies>
 </project>

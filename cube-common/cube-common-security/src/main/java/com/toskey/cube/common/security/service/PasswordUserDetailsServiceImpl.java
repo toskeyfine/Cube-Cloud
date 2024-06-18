@@ -1,9 +1,9 @@
-package com.toskey.cube.common.resource.server.component;
+package com.toskey.cube.common.security.service;
 
 import com.toskey.cube.common.core.base.RestResult;
 import com.toskey.cube.common.core.constant.CacheConstants;
 import com.toskey.cube.common.core.exception.BusinessException;
-import com.toskey.cube.common.resource.server.principal.LoginUser;
+import com.toskey.cube.common.security.principal.LoginUser;
 import com.toskey.cube.service.sas.interfaces.dto.UserDTO;
 import com.toskey.cube.service.sas.interfaces.service.RemoteUserService;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,20 +21,16 @@ import java.util.Optional;
  * @description TODO
  * @date 2024/6/6 17:13
  */
-public class CubePasswordUserDetailsServiceImpl implements CubeUserDetailsService {
+public class PasswordUserDetailsServiceImpl implements CubeUserDetailsService {
 
     private final RedisTemplate<String, Object> redisTemplate;
 
     private final RemoteUserService remoteUserService;
 
-    public CubePasswordUserDetailsServiceImpl(final RedisTemplate<String, Object> redisTemplate,
-            final RemoteUserService remoteUserService) {
+    public PasswordUserDetailsServiceImpl(final RedisTemplate<String, Object> redisTemplate,
+                                          final RemoteUserService remoteUserService) {
         this.redisTemplate = redisTemplate;
         this.remoteUserService = remoteUserService;
-    }
-    @Override
-    public boolean support(AuthorizationGrantType grantType) {
-        return AuthorizationGrantType.PASSWORD.getValue().equals(grantType.getValue());
     }
 
     @Override
@@ -46,7 +42,7 @@ public class CubePasswordUserDetailsServiceImpl implements CubeUserDetailsServic
         }
         RestResult<UserDTO> result = remoteUserService.loadUserByUsername(username);
         if (result == null || !result.isSuccess()) {
-            throw new BusinessException("");
+            throw new BusinessException("用户查询错误.");
         }
         LoginUser loginUser = (LoginUser) Optional.ofNullable(result.getData())
                 .map(this::buildUserDetails)

@@ -1,4 +1,4 @@
-package com.toskey.cube.common.resource.server.component;
+package com.toskey.cube.common.security.component;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;

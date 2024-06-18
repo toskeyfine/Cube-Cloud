@@ -1,6 +1,6 @@
-package com.toskey.cube.common.resource.server.util;
+package com.toskey.cube.common.security.util;
 
-import com.toskey.cube.common.resource.server.principal.LoginUser;
+import com.toskey.cube.common.security.principal.LoginUser;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;

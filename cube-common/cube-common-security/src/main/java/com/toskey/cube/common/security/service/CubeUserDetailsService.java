@@ -1,8 +1,8 @@
-package com.toskey.cube.common.resource.server.component;
+package com.toskey.cube.common.security.service;
 
 import com.toskey.cube.common.core.constant.CommonConstants;
 import com.toskey.cube.common.core.constant.SecurityConstants;
-import com.toskey.cube.common.resource.server.principal.LoginUser;
+import com.toskey.cube.common.security.principal.LoginUser;
 import com.toskey.cube.service.sas.interfaces.dto.UserDTO;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,8 +22,6 @@ import java.util.Set;
  * @date 2024/6/6 10:49
  */
 public interface CubeUserDetailsService extends UserDetailsService {
-
-    boolean support(AuthorizationGrantType grantType);
 
     default UserDetails buildUserDetails(UserDTO userDTO) {
         Set<String> authoritySet = new HashSet<>();

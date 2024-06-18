@@ -1,4 +1,4 @@
-package com.toskey.cube.common.resource.server.principal;
+package com.toskey.cube.common.security.principal;
 
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
