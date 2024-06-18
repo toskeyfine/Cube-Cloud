@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 个人中心
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/12 17:18
+ * @author toskey
+ * @version 1.0.0
  */
 @RestController
 @RequestMapping("/profile")

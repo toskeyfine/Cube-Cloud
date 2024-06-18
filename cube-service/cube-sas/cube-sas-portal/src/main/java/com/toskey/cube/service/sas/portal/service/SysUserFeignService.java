@@ -2,6 +2,7 @@ package com.toskey.cube.service.sas.portal.service;
 
 import com.toskey.cube.common.core.base.RestResult;
 import com.toskey.cube.common.core.constant.CommonConstants;
+import com.toskey.cube.common.resource.server.annotation.AuthIgnore;
 import com.toskey.cube.service.sas.interfaces.dto.UserDTO;
 import com.toskey.cube.service.sas.business.service.SysUserService;
 import lombok.RequiredArgsConstructor;
@@ -10,11 +11,10 @@ import org.springframework.web.bind.annotation.*;
 /**
  * SysUserFeignService
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 15:58
+ * @author toskey
+ * @version 1.0.0
  */
+@AuthIgnore
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(CommonConstants.FEIGN_SERVICE_PATH_PREFIX + "/user")

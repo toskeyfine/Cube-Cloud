@@ -84,18 +84,18 @@ public class SysPostService extends ServiceImpl<SysPostMapper, SysPost> implemen
      */
     public boolean updatePost(SysPost post) {
         if (StringUtils.isBlank(post.getId())) {
-            throw new BusinessException("");
+            throw new BusinessException("岗位选择错误");
         }
         if (checkNameExists(post.getId(), post.getName())) {
-            throw new BusinessException("");
+            throw new BusinessException("岗位名称已存在");
         }
         if (checkCodeExists(post.getId(), post.getCode())) {
-            throw new BusinessException("");
+            throw new BusinessException("岗位编码已存在");
         }
         // 用户绑定过的岗位不允许修改状态
         if (StringUtils.equals(CommonConstants.DATA_STATUS_DISABLED, post.getStatus())) {
             if (baseMapper.postBindCount(post.getId()) > 0) {
-                throw new BusinessException("");
+                throw new BusinessException("该岗位已绑定用户.");
             }
         }
         return updateById(post);
@@ -118,7 +118,7 @@ public class SysPostService extends ServiceImpl<SysPostMapper, SysPost> implemen
     public boolean removePost(String[] ids) {
         for (String id : ids) {
             if (baseMapper.postBindCount(id) > 0) {
-                throw new BusinessException("");
+                throw new BusinessException("该岗位已绑定用户.");
             }
         }
         return removeBatchByIds(Arrays.asList(ids));
@@ -128,7 +128,7 @@ public class SysPostService extends ServiceImpl<SysPostMapper, SysPost> implemen
         return exists(
                 Wrappers.<SysPost>lambdaQuery()
                         .eq(SysPost::getName, name)
-                        .eq(StringUtils.isNotBlank(id), SysPost::getId, id)
+                        .ne(StringUtils.isNotBlank(id), SysPost::getId, id)
         );
     }
 
@@ -136,7 +136,7 @@ public class SysPostService extends ServiceImpl<SysPostMapper, SysPost> implemen
         return exists(
                 Wrappers.<SysPost>lambdaQuery()
                         .eq(SysPost::getCode, code)
-                        .eq(StringUtils.isNotBlank(id), SysPost::getId, id)
+                        .ne(StringUtils.isNotBlank(id), SysPost::getId, id)
         );
     }
 }

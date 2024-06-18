@@ -17,4 +17,5 @@ import org.apache.ibatis.annotations.Param;
 public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
     int deleteMenuRoleRel(@Param("menuId") String menuId);
+
 }

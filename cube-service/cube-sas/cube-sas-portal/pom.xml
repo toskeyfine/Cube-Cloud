@@ -32,6 +32,10 @@
         </dependency>
         <dependency>
             <groupId>com.toskey</groupId>
+            <artifactId>cube-common-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.toskey</groupId>
             <artifactId>cube-sas-business</artifactId>
             <version>${cube-cloud.version}</version>
         </dependency>

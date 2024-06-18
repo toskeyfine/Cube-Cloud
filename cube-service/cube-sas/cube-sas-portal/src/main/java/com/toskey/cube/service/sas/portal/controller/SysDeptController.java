@@ -1,6 +1,5 @@
 package com.toskey.cube.service.sas.portal.controller;
 
-import com.toskey.cube.common.core.base.PageData;
 import com.toskey.cube.common.core.base.RestResult;
 import com.toskey.cube.service.sas.business.service.SysDeptService;
 import com.toskey.cube.service.sas.business.vo.dept.DeptFormVO;
@@ -14,10 +13,8 @@ import java.util.List;
 /**
  * SysDeptController
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/13 13:31
+ * @author toskey
+ * @version 1.0.0
  */
 @RestController
 @RequestMapping("/sys/dept")

@@ -8,6 +8,7 @@ import com.toskey.cube.service.sas.interfaces.service.fallback.RemoteUserService
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * RemoteUserService
@@ -25,4 +26,8 @@ public interface RemoteUserService {
 
     @GetMapping(CommonConstants.FEIGN_SERVICE_PATH_PREFIX + "/user/mobile/{mobile}")
     RestResult<UserDTO> loadUserByMobile(@PathVariable("mobile") String mobile);
+
+    @PostMapping(CommonConstants.FEIGN_SERVICE_PATH_PREFIX + "/user/{username}/locked")
+    RestResult<Boolean> lock(@PathVariable("username") String username);
+
 }

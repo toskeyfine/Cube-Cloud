@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.*;
 /**
  * SysPostController
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/13 14:51
+ * @author toskey
+ * @version 1.0.0
  */
 @RestController
 @RequestMapping("/sys/post")

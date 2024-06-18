@@ -1,0 +1,22 @@
+server:
+  port: ${port:6000}
+
+spring:
+  application:
+    name: cube-cloud-sas
+  profiles:
+    active: ${profiles.active:dev}
+  cloud:
+    nacos:
+      username: ${nacos.username:nacos}
+      password: ${nacos.password:nacos}
+      discovery:
+        server-addr: ${nacos.addr:127.0.0.1}:${nacos.port:8848}
+        namespace: ${nacos.namespace:cube-cloud}
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+  config:
+    import:
+      - optional:nacos:application-${spring.profiles.active}.yml
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.yml
