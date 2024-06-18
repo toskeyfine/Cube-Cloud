@@ -26,8 +26,8 @@ public class SecurityAutoConfiguration {
     }
 
     @Bean
-    public CubeUserDetailsService smsUserDetailsService() {
-        return new SmsUserDetailsServiceImpl();
+    public CubeUserDetailsService smsUserDetailsService(RemoteUserService remoteUserService) {
+        return new SmsUserDetailsServiceImpl(remoteUserService);
     }
 
     @Bean
