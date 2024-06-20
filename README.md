@@ -62,7 +62,14 @@ git clone https://github.com/toskeyfine/cube-cloud.git
 ```
 2.创建数据库
 ```
-数据库脚本路径：support/db/cube_init.sql
+分别创建cube-cloud-sas、cube-cloud-log、cube-cloud-config库
+```
+3.导入数据库脚本
+```
+数据库脚本路径：
+support/db/cube_cloud-sas.sql
+support/db/cube_cloud-log.sql
+support/db/cube_cloud-config.sql
 ```
 3.导入nacos配置
 ```
