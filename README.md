@@ -15,7 +15,7 @@
 - 通过Spring Authorization Server提供基于OAuth2.0的单点登录
 
 ## 核心服务
-### cube-cloud-gateway(网关))
+### cube-cloud-gateway(网关)
 - 基于Spring Cloud Gateway，提供网关服务
 - 实现基于anji-plus登录验证码
 
