@@ -5,6 +5,9 @@
     <img src="https://img.shields.io/badge/license-MIT-green">
 </p>
 
+## 提示
+因时间问题，前端正在开发中，预计将于2024年9月开放仓库
+
 ## 简介
 - 基于Spring Boot、Spring Cloud、Spring Cloud Alibaba以及Spring Authorization Server的快速开发平台
 - 全平台基于微服务架构
