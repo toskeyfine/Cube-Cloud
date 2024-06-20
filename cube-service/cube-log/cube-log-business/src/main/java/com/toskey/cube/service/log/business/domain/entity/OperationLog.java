@@ -36,8 +36,6 @@ public class OperationLog extends TenantEntity {
 
     private String exMsg;                   // 错误信息
 
-    private String serviceId;               // 所属服务ID
-
     public String getTitle() {
         return title;
     }
@@ -126,11 +124,4 @@ public class OperationLog extends TenantEntity {
         this.exMsg = exMsg;
     }
 
-    public String getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(String serviceId) {
-        this.serviceId = serviceId;
-    }
 }

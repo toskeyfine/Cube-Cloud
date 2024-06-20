@@ -1,6 +1,6 @@
 package com.toskey.cube.service.config.portal.controller;
 
-import com.toskey.service.config.business.service.OAuth2ClientService;
+import com.toskey.cube.service.config.business.service.OAuth2ClientService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

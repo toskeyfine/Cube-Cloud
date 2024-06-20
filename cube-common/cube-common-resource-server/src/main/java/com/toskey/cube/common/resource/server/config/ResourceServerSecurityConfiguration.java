@@ -1,8 +1,8 @@
 package com.toskey.cube.common.resource.server.config;
 
-import com.toskey.cube.common.resource.server.component.CubeAccessDeniedHandler;
 import com.toskey.cube.common.resource.server.component.CubeBearerTokenResolver;
 import com.toskey.cube.common.resource.server.component.ResourceServerExceptionEntryPoint;
+import com.toskey.cube.common.security.component.CubeAccessDeniedHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -37,7 +37,7 @@ public class ResourceServerSecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthIgnoreProperties ignoreProperties) throws Exception {
         http.authorizeHttpRequests(requests ->
                         requests.requestMatchers(
-                                        ignoreProperties.getIgnoreUrls()
+                                        ignoreProperties.getUrls()
                                                 .stream()
                                                 .map(AntPathRequestMatcher::new)
                                                 .toArray(AntPathRequestMatcher[]::new)

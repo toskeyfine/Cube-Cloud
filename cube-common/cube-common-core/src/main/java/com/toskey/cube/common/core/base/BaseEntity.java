@@ -24,7 +24,7 @@ import java.util.Arrays;
  */
 public class BaseEntity implements Serializable {
 
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ASSIGN_ID)
     protected String id;
 
     @SneakyThrows

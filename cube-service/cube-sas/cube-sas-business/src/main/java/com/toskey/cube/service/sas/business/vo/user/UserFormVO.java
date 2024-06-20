@@ -33,27 +33,21 @@ public class UserFormVO extends BaseEntityMapper {
     @Size(min = 2, max = 10)
     private String name;
 
-    private Integer age;
-
     private String gender;
 
     private String avatar;
 
-    @Size(min = 0, max = 11, message = "手机号码长度不能超过11个字符")
+    @Size(max = 14, message = "手机号码长度不能超过14个字符")
     private String mobile;
 
     @Email(message = "邮箱格式不正确")
-    @Size(min = 0, max = 200, message = "邮箱长度不能超过50个字符")
+    @Size(max = 100, message = "邮箱长度不能超过100个字符")
     private String email;
 
     private String userType;
 
     @NotBlank
     private String status;
-
-    private String lastLoginIp;
-
-    private LocalDateTime lastLoginTime;
 
     private String remark;
 
@@ -95,14 +89,6 @@ public class UserFormVO extends BaseEntityMapper {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
     }
 
     public String getGender() {
@@ -151,22 +137,6 @@ public class UserFormVO extends BaseEntityMapper {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp;
-    }
-
-    public LocalDateTime getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(LocalDateTime lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
     }
 
     public String getRemark() {

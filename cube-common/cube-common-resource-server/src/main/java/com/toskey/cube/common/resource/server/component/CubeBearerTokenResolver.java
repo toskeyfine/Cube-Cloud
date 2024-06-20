@@ -44,7 +44,7 @@ public class CubeBearerTokenResolver implements BearerTokenResolver {
 
     private boolean needResolver(final String requestPath) {
         PathMatcher pathMatcher = new AntPathMatcher();
-        return authIgnoreProperties.getIgnoreUrls().stream()
+        return authIgnoreProperties.getUrls().stream()
                 .noneMatch(url -> pathMatcher.match(url, requestPath));
     }
 

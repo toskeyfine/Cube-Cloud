@@ -31,14 +31,14 @@ import java.util.regex.Pattern;
  */
 @Setter
 @Getter
-@ConfigurationProperties(prefix = "cube.security.ignore")
+@ConfigurationProperties(prefix = "cube.resource-server.ignore")
 public class AuthIgnoreProperties implements InitializingBean {
 
     private static final Pattern URL_PATTERN = Pattern.compile("\\{(.*?)\\}");
 
     private static final Pattern VAR_PATTERN = Pattern.compile("\\$(\\d+)");
 
-    private List<String> ignoreUrls = new ArrayList<>();
+    private List<String> urls = new ArrayList<>();
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -54,7 +54,7 @@ public class AuthIgnoreProperties implements InitializingBean {
             RequestMapping requestMapping = AnnotationUtils.findAnnotation(clazz, RequestMapping.class);
             if (requestMapping != null) {
                 String[] paths = requestMapping.value();
-                Arrays.stream(paths).forEach(path -> ignoreUrls.add(handlePathPattern(path)));
+                Arrays.stream(paths).forEach(path -> urls.add(handlePathPattern(path) + "/**"));
             }
         }
         // 处理FeignApi方法注解
@@ -66,7 +66,7 @@ public class AuthIgnoreProperties implements InitializingBean {
                 PathPatternsRequestCondition condition = k.getPathPatternsCondition();
                 if (condition != null) {
                     condition.getPatternValues().forEach(url -> {
-                        ignoreUrls.add(handlePathPattern(url));
+                        urls.add(handlePathPattern(url));
                     });
                 }
             }

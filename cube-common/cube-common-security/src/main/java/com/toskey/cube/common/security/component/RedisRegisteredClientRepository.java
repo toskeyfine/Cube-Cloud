@@ -22,13 +22,7 @@ public class RedisRegisteredClientRepository implements RegisteredClientReposito
 
     @Override
     public void save(RegisteredClient registeredClient) {
-        String cacheKey = registeredClient.getClientId();
-        RegisteredClient cache = (RegisteredClient) redisTemplate.opsForValue().get(cacheKey);
-        if (cache != null) {
-            throw new DataIntegrityViolationException("Registered client: " + registeredClient.getClientId() + " already exists.");
-        } else {
-            redisTemplate.opsForValue().set(cacheKey, registeredClient);
-        }
+//        throw new UnsupportedOperationException("Unsupported operation: RedisRegisteredClientRepository.save()");
     }
 
     @Override
@@ -42,6 +36,6 @@ public class RedisRegisteredClientRepository implements RegisteredClientReposito
     }
 
     private String buildCacheKey(String clientId) {
-        return String.format("%s:client:registered:%s", CacheConstants.CACHE_GLOBAL_PREFIX, clientId);
+        return String.format("%s:%s:%s", CacheConstants.CACHE_GLOBAL_PREFIX, CacheConstants.CACHE_REGISTERED_CLIENT_KEY, clientId);
     }
 }

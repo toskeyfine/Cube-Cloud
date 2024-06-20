@@ -11,10 +11,7 @@ import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
 import net.sf.jsqlparser.expression.operators.relational.EqualsTo;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
-import net.sf.jsqlparser.statement.select.FromItem;
-import net.sf.jsqlparser.statement.select.PlainSelect;
-import net.sf.jsqlparser.statement.select.Select;
-import net.sf.jsqlparser.statement.select.SetOperationList;
+import net.sf.jsqlparser.statement.select.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
@@ -52,10 +49,11 @@ public class TenantMybatisInterceptor extends JsqlParserSupport implements Inner
 
     @Override
     protected void processSelect(Select select, int index, String sql, Object obj) {
-        if (select instanceof PlainSelect plainSelect) {
+        SelectBody selectBody = select.getSelectBody();
+        if (selectBody instanceof PlainSelect plainSelect) {
             this.setWhere(plainSelect, (String) obj);
-        } else if (select instanceof SetOperationList setOperationList) {
-            List<Select> selectBodyList = setOperationList.getSelects();
+        } else if (selectBody instanceof SetOperationList setOperationList) {
+            List<SelectBody> selectBodyList = setOperationList.getSelects();
             selectBodyList.forEach(s -> this.setWhere((PlainSelect) s, (String) obj));
         }
     }

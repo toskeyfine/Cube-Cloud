@@ -8,15 +8,7 @@ import com.toskey.cube.service.log.interfaces.dto.LoginLogDTO;
  * @author toskey
  * @version 1.0.0
  */
-public class SaveLoginLogEvent {
+public record SaveLoginLogEvent(LoginLogDTO logDTO) {
 
-    private final LoginLogDTO logDTO;
 
-    public SaveLoginLogEvent(LoginLogDTO logDTO) {
-        this.logDTO = logDTO;
-    }
-
-    public LoginLogDTO getLogDTO() {
-        return logDTO;
-    }
 }

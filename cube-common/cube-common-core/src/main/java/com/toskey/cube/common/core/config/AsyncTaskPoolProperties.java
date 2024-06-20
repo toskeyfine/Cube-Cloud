@@ -15,12 +15,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @AllArgsConstructor
 public class AsyncTaskPoolProperties {
 
-    private final int corePoolSize;
+    private final int corePoolSize = 4;
 
-    private final int maxPoolSize;
+    private final int maxPoolSize = 8;
 
-    private final int keepAliveSeconds;
+    private final int keepAliveSeconds = 60;
 
-    private final int queueCapacity;
+    private final int queueCapacity = 20;
 
 }

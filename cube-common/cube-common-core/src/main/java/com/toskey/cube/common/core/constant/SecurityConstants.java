@@ -14,11 +14,11 @@ public interface SecurityConstants {
 
     String TENANT_ID = "tenant-id";
 
+    long ACCESS_TOKEN_EXPIRES = 60 * 60 * 6;
+
+    long REFRESH_TOKEN_EXPIRES = 60 * 60 * 24;
+
     String AUTHORITY_ROLE_PREFIX = "ROLE_";
-
-    String HEADER_SERVICE = "S-SERVICE";
-
-    String HEADER_SERVICE_CUBE = "cube-cloud";
 
     String HEADER_TENANT = "X-TENANT";
 

@@ -17,10 +17,11 @@ import java.util.Map;
 
 /**
  * OAuth2EndpointUtils
- *
+ * <p>
+ *     采用 {@link org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2EndpointUtils}
+ * </p>
  * @author toskey
  * @version 1.0.0
- * @see org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2EndpointUtils
  */
 public final class OAuth2EndpointUtils {
 

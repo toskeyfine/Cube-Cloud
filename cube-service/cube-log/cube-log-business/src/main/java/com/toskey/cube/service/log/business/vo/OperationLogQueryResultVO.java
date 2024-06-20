@@ -41,8 +41,6 @@ public class OperationLogQueryResultVO extends BaseEntityMapper {
 
     private String exMsg;                   // 错误信息
 
-    private String serviceId;               // 所属服务ID
-
     private String createBy;
 
     private LocalDateTime createTime;
@@ -141,14 +139,6 @@ public class OperationLogQueryResultVO extends BaseEntityMapper {
 
     public void setExMsg(String exMsg) {
         this.exMsg = exMsg;
-    }
-
-    public String getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(String serviceId) {
-        this.serviceId = serviceId;
     }
 
     public String getCreateBy() {

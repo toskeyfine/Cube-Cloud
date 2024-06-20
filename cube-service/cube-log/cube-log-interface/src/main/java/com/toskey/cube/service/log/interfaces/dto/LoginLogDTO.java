@@ -25,17 +25,7 @@ public class LoginLogDTO extends BaseEntityMapper {
     private String type;
 
     /**
-     * 登录类：
-     * 10001.授权码模式
-     * 10002.用户密码模式
-     * 10003.手机号验证码登录（预留）
-     * 10004.邮箱验证码登录（预留）
-     * 10005.客户端凭证模式（预留）
-     * 10006.第三方登录（预留）
-     * 注销类：
-     * 20001.主动
-     * 20002.强制
-     * 20003.超时
+     * 登录请求类型
      */
     private String grantType;
 

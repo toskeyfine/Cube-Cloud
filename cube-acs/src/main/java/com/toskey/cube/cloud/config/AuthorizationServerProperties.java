@@ -14,7 +14,7 @@ import java.util.List;
 @ConfigurationProperties("cube.authorization.server")
 public class AuthorizationServerProperties {
 
-    private String[] ignorePaths = {"/token/**", "/login/**", "/error"};
+    private String[] ignorePaths = {"/oauth2/**", "/token/**", "/login/**", "/error"};
 
     private String loginEntryPoint;
 

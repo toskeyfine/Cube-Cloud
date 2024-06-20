@@ -33,7 +33,7 @@ public class LoginLog extends TenantEntity {
      * 20002.强制
      * 20003.超时
      */
-    private String loginType;
+    private String grantType;
 
     /**
      * 请求客户端IP
@@ -57,12 +57,12 @@ public class LoginLog extends TenantEntity {
         this.type = type;
     }
 
-    public String getLoginType() {
-        return loginType;
+    public String getGrantType() {
+        return grantType;
     }
 
-    public void setLoginType(String loginType) {
-        this.loginType = loginType;
+    public void setGrantType(String grantType) {
+        this.grantType = grantType;
     }
 
     public String getClientIp() {

@@ -37,7 +37,6 @@ public class OperationLogService extends ServiceImpl<OperationLogMapper, Operati
                         .like(StringUtils.isNotBlank(query.getRequestRemoteHost()), OperationLog::getRequestRemoteHost, query.getRequestRemoteHost())
                         .eq(StringUtils.isNotBlank(query.getModule()), OperationLog::getModule, query.getModule())
                         .eq(StringUtils.isNotBlank(query.getLogType()), OperationLog::getLogType, query.getLogType())
-                        .eq(StringUtils.isNotBlank(query.getServiceId()), OperationLog::getServiceId, query.getServiceId())
         );
         return PageUtils.buildPageData(page, EntityUtils.toMapper(logList, OperationLogQueryResultVO.class));
     }

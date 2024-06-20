@@ -20,6 +20,12 @@ public final class RestResult<T> implements Serializable {
 
     private RestResult() {}
 
+    public RestResult(int code, String msg, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
+
     public int getCode() {
         return code;
     }
@@ -85,7 +91,7 @@ public final class RestResult<T> implements Serializable {
     }
 
     public static <T> RestResult<T> of(int code, String msg, T data) {
-        return RestResult.of(code, msg, data);
+        return new RestResult(code, msg, data);
     }
 
     public static <T> RestResult<T> of(RestResultCode restResultCode) {

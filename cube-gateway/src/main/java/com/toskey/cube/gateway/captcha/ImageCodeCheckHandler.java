@@ -49,34 +49,34 @@ public class ImageCodeCheckHandler implements HandlerFunction<ServerResponse> {
     @SneakyThrows
     @Override
     public Mono<ServerResponse> handle(@Nonnull ServerRequest request) {
-        try (ExecutorService executorService = Executors.newSingleThreadExecutor()) {
-            Future<RestResult<ConfigDTO>> future = executorService.submit(() -> remoteConfigService.get("sys:login:captcha_type"));
-            RestResult<ConfigDTO> result = future.get();
-            executorService.shutdown();
-            if (!Objects.nonNull(result) || result.getCode() != 0) {
-                throw new RuntimeException("获取配置信息失败");
-            }
-            return request.bodyToMono(HashMap.class)
-                    .flatMap(map -> {
-                        CaptchaVO vo = new CaptchaVO();
-                        vo.setPointJson((String) map.get("pointJson"));
-                        vo.setToken((String) map.get("token"));
-                        vo.setCaptchaType(StringUtils.isNotEmpty(result.getData().getValue()) ? result.getData().getValue() : CommonConstants.CAPTCHA_DEFAULT_TYPE);
-                        return Mono.just(vo);
-                    }).flatMap(captcha -> {
-                        CaptchaService captchaService = SpringContextHolder.getBean(CaptchaService.class);
-                        ResponseModel responseModel = captchaService.check(captcha);
-                        return Mono.just(responseModel);
-                    }).flatMap(response -> {
-                        try {
-                            return ServerResponse.status(HttpStatus.OK)
-                                    .contentType(MediaType.APPLICATION_JSON)
-                                    .body(BodyInserters.fromValue(objectMapper.writeValueAsString(RestResult.success(response))));
-                        } catch (JsonProcessingException e) {
-                            throw new BusinessException(e.getMessage());
-                        }
-                    });
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Future<RestResult<ConfigDTO>> future = executorService.submit(() -> remoteConfigService.get("sys:login:captcha_type"));
+        RestResult<ConfigDTO> result = future.get();
+        executorService.shutdown();
+        if (!Objects.nonNull(result) || result.getCode() != 0) {
+            throw new RuntimeException("获取配置信息失败");
         }
+        return request.bodyToMono(HashMap.class)
+                .flatMap(map -> {
+                    CaptchaVO vo = new CaptchaVO();
+                    vo.setPointJson((String) map.get("pointJson"));
+                    vo.setToken((String) map.get("token"));
+                    vo.setCaptchaType(StringUtils.isNotEmpty(result.getData().getValue()) ? result.getData().getValue() : CommonConstants.CAPTCHA_DEFAULT_TYPE);
+                    return Mono.just(vo);
+                }).flatMap(captcha -> {
+                    CaptchaService captchaService = SpringContextHolder.getBean(CaptchaService.class);
+                    ResponseModel responseModel = captchaService.check(captcha);
+                    return Mono.just(responseModel);
+                }).flatMap(response -> {
+                    try {
+                        return ServerResponse.status(HttpStatus.OK)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .body(BodyInserters.fromValue(objectMapper.writeValueAsString(RestResult.success(response))));
+                    } catch (JsonProcessingException e) {
+                        throw new BusinessException(e.getMessage());
+                    }
+                });
+
     }
 
 }

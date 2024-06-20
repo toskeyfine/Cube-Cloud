@@ -8,6 +8,7 @@ import com.toskey.cube.cloud.authentication.sms.SmsCodeAuthenticationProvider;
 import com.toskey.cube.cloud.handler.*;
 import com.toskey.cube.cloud.token.AccessTokenGenerator;
 import com.toskey.cube.cloud.token.TokenCustomizer;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,12 +21,16 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.token.DelegatingOAuth2TokenGenerator;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2AccessTokenGenerator;
+import org.springframework.security.oauth2.server.authorization.token.OAuth2RefreshTokenGenerator;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.oauth2.server.authorization.web.authentication.DelegatingAuthenticationConverter;
 import org.springframework.security.web.DefaultSecurityFilterChain;
@@ -49,13 +54,13 @@ import java.util.Arrays;
 @EnableConfigurationProperties(AuthorizationServerProperties.class)
 public class AuthorizationServerConfiguration {
 
-    private final OAuth2AuthorizationService authorizationService;
+    private final OAuth2AuthorizationService redisAuthorizationService;
 
     private final RedisTemplate<String, Object> redisTemplate;
 
-    public AuthorizationServerConfiguration(OAuth2AuthorizationService authorizationService,
+    public AuthorizationServerConfiguration(OAuth2AuthorizationService redisAuthorizationService,
                                             RedisTemplate<String, Object> redisTemplate) {
-        this.authorizationService = authorizationService;
+        this.redisAuthorizationService = redisAuthorizationService;
         this.redisTemplate = redisTemplate;
     }
 
@@ -108,15 +113,16 @@ public class AuthorizationServerConfiguration {
                                 .oidc(Customizer.withDefaults())
                                 .clientAuthentication(clientAuthentication ->
                                         clientAuthentication.errorResponseHandler(clientAuthenticationFailureHandler)
-                                )
-                                .authorizationService(authorizationService)
-                                .authorizationServerSettings(
-                                        AuthorizationServerSettings
-                                                .builder()
-                                                .issuer(authorizationServerProperties.getIssuerUrl())
-                                                .build()
                                 ),
                         Customizer.withDefaults());
+
+        http.with(configurer.authorizationService(redisAuthorizationService)
+                .authorizationServerSettings(
+                        AuthorizationServerSettings
+                                .builder()
+                                .issuer(authorizationServerProperties.getIssuerUrl())
+                                .build()
+                ), Customizer.withDefaults());
 
         DefaultSecurityFilterChain chain = http.build();
         AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
@@ -125,9 +131,9 @@ public class AuthorizationServerConfiguration {
         userDetailsAuthenticationProvider.setRedisTemplate(redisTemplate);
         http.authenticationProvider(userDetailsAuthenticationProvider);
         // 密码模式前置处理
-        http.authenticationProvider(new PasswordAuthenticationProvider(authorizationService, accessTokenGenerator(), authenticationManager));
+        http.authenticationProvider(new PasswordAuthenticationProvider(redisAuthorizationService, accessTokenGenerator(), authenticationManager));
         // 短信验证码模式前置处理
-        http.authenticationProvider(new SmsCodeAuthenticationProvider(authorizationService, accessTokenGenerator(), authenticationManager));
+        http.authenticationProvider(new SmsCodeAuthenticationProvider(redisAuthorizationService, accessTokenGenerator(), authenticationManager));
 
         return chain;
     }
@@ -136,7 +142,7 @@ public class AuthorizationServerConfiguration {
     public OAuth2TokenGenerator<OAuth2Token> accessTokenGenerator() {
         AccessTokenGenerator generator = new AccessTokenGenerator();
         generator.setAccessTokenCustomizer(new TokenCustomizer());
-        return new DelegatingOAuth2TokenGenerator(generator, new OAuth2AccessTokenGenerator());
+        return new DelegatingOAuth2TokenGenerator(generator, new OAuth2RefreshTokenGenerator());
     }
 
     @Bean
@@ -151,5 +157,11 @@ public class AuthorizationServerConfiguration {
         source.registerCorsConfiguration("/**", configuration);
 
         return new CorsFilter(source);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

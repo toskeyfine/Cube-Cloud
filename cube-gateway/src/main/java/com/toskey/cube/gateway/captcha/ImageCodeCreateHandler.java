@@ -39,28 +39,28 @@ import java.util.concurrent.Future;
 @RequiredArgsConstructor
 public class ImageCodeCreateHandler implements HandlerFunction<ServerResponse> {
 
-	private final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
-	private final RemoteConfigService remoteConfigService;
+    private final RemoteConfigService remoteConfigService;
 
-	@Override
-	@SneakyThrows
-	public Mono<ServerResponse> handle(@Nonnull ServerRequest serverRequest) {
-		try (ExecutorService executorService = Executors.newSingleThreadExecutor()) {
-			Future<RestResult<ConfigDTO>> future = executorService.submit(() -> remoteConfigService.get("sys:login:captcha_type"));
-			RestResult<ConfigDTO> result = future.get();
-			executorService.shutdown();
-			if (!Objects.nonNull(result) || result.getCode() != 0) {
-				throw new RuntimeException("获取配置信息失败");
-			}
-			CaptchaVO vo = new CaptchaVO();
-			vo.setCaptchaType(StringUtils.isNotEmpty(result.getData().getValue()) ? result.getData().getValue() : CommonConstants.CAPTCHA_DEFAULT_TYPE);
-			CaptchaService captchaService = SpringContextHolder.getBean(CaptchaService.class);
-			ResponseModel responseModel = captchaService.get(vo);
+    @Override
+    @SneakyThrows
+    public Mono<ServerResponse> handle(@Nonnull ServerRequest serverRequest) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Future<RestResult<ConfigDTO>> future = executorService.submit(() -> remoteConfigService.get("sys:login:captcha_type"));
+        RestResult<ConfigDTO> result = future.get();
+        executorService.shutdown();
+        if (!Objects.nonNull(result) || result.getCode() != 0) {
+            throw new RuntimeException("获取配置信息失败");
+        }
+        CaptchaVO vo = new CaptchaVO();
+        vo.setCaptchaType(StringUtils.isNotEmpty(result.getData().getValue()) ? result.getData().getValue() : CommonConstants.CAPTCHA_DEFAULT_TYPE);
+        CaptchaService captchaService = SpringContextHolder.getBean(CaptchaService.class);
+        ResponseModel responseModel = captchaService.get(vo);
 
-			return ServerResponse.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON)
-					.body(BodyInserters.fromValue(objectMapper.writeValueAsString(RestResult.success(responseModel))));
-		}
-	}
+        return ServerResponse.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(objectMapper.writeValueAsString(RestResult.success(responseModel))));
+
+    }
 
 }

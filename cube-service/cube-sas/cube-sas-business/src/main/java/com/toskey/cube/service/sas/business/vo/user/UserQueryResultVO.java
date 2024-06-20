@@ -26,8 +26,6 @@ public class UserQueryResultVO extends BaseEntityMapper {
 
     private String name;
 
-    private Integer age;
-
     private String gender;
 
     private String avatar;
@@ -39,10 +37,6 @@ public class UserQueryResultVO extends BaseEntityMapper {
     private String userType;
 
     private String status;
-
-    private String lastLoginIp;
-
-    private LocalDateTime lastLoginTime;
 
     private String remark;
 
@@ -82,14 +76,6 @@ public class UserQueryResultVO extends BaseEntityMapper {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
     }
 
     public String getGender() {
@@ -138,22 +124,6 @@ public class UserQueryResultVO extends BaseEntityMapper {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp;
-    }
-
-    public LocalDateTime getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(LocalDateTime lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
     }
 
     public String getRemark() {

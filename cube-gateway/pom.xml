@@ -32,6 +32,10 @@
         </dependency>
         <dependency>
             <groupId>com.toskey</groupId>
+            <artifactId>cube-common-sentinel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.toskey</groupId>
             <artifactId>cube-config-interface</artifactId>
         </dependency>
         <dependency>

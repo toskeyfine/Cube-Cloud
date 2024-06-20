@@ -16,5 +16,7 @@ public interface CacheConstants {
 
     String CACHE_AUTHORIZATION_KEY = "authorization";
 
+    String CACHE_REGISTERED_CLIENT_KEY = "registered_client";
+
     String CACHE_LOGIN_SMS_CODE_PREFIX = CACHE_GLOBAL_PREFIX + ":login:sms:";
 }

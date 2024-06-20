@@ -17,7 +17,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping("/sys/role")
+@RequestMapping("/sys/menu")
 public class SysMenuController {
 
     private final SysMenuService menuService;

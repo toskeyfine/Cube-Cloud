@@ -27,7 +27,7 @@ public class SaveLogEventListener {
     @Order
     @EventListener(SaveLoginLogEvent.class)
     public void saveLog(SaveLoginLogEvent event) {
-        remoteLogService.saveLoginLog(event.getLogDTO());
+        remoteLogService.saveLoginLog(event.logDTO());
     }
 
 }

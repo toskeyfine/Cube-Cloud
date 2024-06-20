@@ -29,7 +29,7 @@ public interface CubeUserDetailsService extends UserDetailsService {
             Arrays.stream(userDTO.getRoleIds()).forEach(role -> authoritySet.add(SecurityConstants.AUTHORITY_ROLE_PREFIX + role));
             authoritySet.addAll(Arrays.asList(userDTO.getPermissions()));
         }
-        return new LoginUser(userDTO.getId(), userDTO.getUsername(), userDTO.getPassword(),
+        return new LoginUser(userDTO.getId(), userDTO.getUsername(), "{bcrypt}" + userDTO.getPassword(),
                 userDTO.getName(), userDTO.getUserType(), userDTO.getGender(), userDTO.getMobile(),
                 userDTO.getEmail(), userDTO.getDeptId(), userDTO.getPostId(), userDTO.getTenantId(),
                 true, true, true,
