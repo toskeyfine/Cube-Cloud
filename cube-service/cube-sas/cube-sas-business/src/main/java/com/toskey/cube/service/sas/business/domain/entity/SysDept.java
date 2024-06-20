@@ -6,10 +6,8 @@ import com.toskey.cube.common.tenant.entity.TenantEntity;
 /**
  * SysDept
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 15:26
+ * @author toskey
+ * @version 1.0.0
  */
 @TableName("sys_dept")
 public class SysDept extends TenantEntity {

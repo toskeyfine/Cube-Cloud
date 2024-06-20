@@ -16,7 +16,7 @@ import java.util.List;
  * PageUtils
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 public class PageUtils {
 

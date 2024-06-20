@@ -28,7 +28,7 @@ import java.util.UUID;
  * OAuth2ClientService
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 @Slf4j
 @Service

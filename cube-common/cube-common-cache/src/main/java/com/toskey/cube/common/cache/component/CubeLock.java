@@ -1,7 +1,5 @@
 package com.toskey.cube.common.cache.component;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 import java.util.Objects;
 
@@ -11,8 +9,6 @@ import java.util.Objects;
  * @author toskey
  * @version 1.0.0
  */
-@Getter
-@AllArgsConstructor
 public class CubeLock implements AutoCloseable {
 
 
@@ -20,10 +16,24 @@ public class CubeLock implements AutoCloseable {
 
     private final IDistributedLock distributedLock;
 
+    public CubeLock(Object lock, IDistributedLock distributedLock) {
+        this.lock = lock;
+        this.distributedLock = distributedLock;
+    }
+
+    public Object getLock() {
+        return lock;
+    }
+
+    public IDistributedLock getDistributedLock() {
+        return distributedLock;
+    }
+
     @Override
     public void close() throws Exception {
         if (Objects.nonNull(lock)) {
             distributedLock.unlock(this);
         }
     }
+
 }

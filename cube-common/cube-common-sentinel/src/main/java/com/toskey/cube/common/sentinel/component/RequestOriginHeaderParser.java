@@ -5,12 +5,10 @@ import com.toskey.cube.common.core.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * RequestOriginHeaderParser
+ * 从请求头中解析源
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/19 10:30
+ * @author toskey
+ * @version 1.0.0
  */
 public class RequestOriginHeaderParser implements RequestOriginParser  {
 

@@ -10,10 +10,8 @@ import org.springframework.stereotype.Component;
 /**
  * RemoteUserServiceFallbackFactory
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 16:09
+ * @author toskey
+ * @version 1.0.0
  */
 @Slf4j
 @Component

@@ -7,10 +7,8 @@ import com.toskey.cube.service.sas.business.domain.entity.SysRole;
 /**
  * RoleQueryVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/12 17:20
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = SysRole.class)
 public class RoleQueryVO extends BaseEntityMapper {

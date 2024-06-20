@@ -4,12 +4,10 @@ package com.toskey.cube.common.tenant.component;
 import lombok.experimental.UtilityClass;
 
 /**
- * TenantContextHolder
+ * 存储租户上下文
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 16:16
+ * @author toskey
+ * @version 1.0.0
  */
 @UtilityClass
 public final class TenantContextHolder {

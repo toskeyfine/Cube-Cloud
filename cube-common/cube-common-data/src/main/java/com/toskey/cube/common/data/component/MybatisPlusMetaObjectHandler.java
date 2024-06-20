@@ -11,10 +11,8 @@ import java.time.LocalDateTime;
 /**
  * MybatisPlusMetaObjectHandler
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 14:42
+ * @author toskey
+ * @version 1.0.0
  */
 public class MybatisPlusMetaObjectHandler implements MetaObjectHandler {
     @Override

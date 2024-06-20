@@ -7,10 +7,8 @@ import com.toskey.cube.common.tenant.entity.TenantEntity;
 /**
  * SysPost
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 15:26
+ * @author toskey
+ * @version 1.0.0
  */
 @TableName("sys_post")
 public class SysPost extends TenantEntity {

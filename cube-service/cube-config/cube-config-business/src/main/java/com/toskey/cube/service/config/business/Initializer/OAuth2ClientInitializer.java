@@ -10,10 +10,8 @@ import org.springframework.stereotype.Component;
 /**
  * ClientInitializer
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 15:55
+ * @author toskey
+ * @version 1.0.0
  */
 @Component
 public class OAuth2ClientInitializer implements InitializingBean {

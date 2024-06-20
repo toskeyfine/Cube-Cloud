@@ -10,10 +10,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 /**
  * LogPortalApplication
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/13 17:56
+ * @author toskey
+ * @version 1.0.0
  */
 @ResourceServer
 @EnableDiscoveryClient

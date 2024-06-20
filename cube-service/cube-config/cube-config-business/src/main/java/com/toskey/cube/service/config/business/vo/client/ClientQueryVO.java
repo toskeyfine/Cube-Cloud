@@ -7,10 +7,8 @@ import com.toskey.cube.service.config.business.domain.entity.OAuth2Client;
 /**
  * OAuth2ClientQueryVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 15:48
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = OAuth2Client.class)
 public class ClientQueryVO extends BaseEntityMapper {

@@ -9,10 +9,8 @@ import jakarta.validation.constraints.Size;
 /**
  * ClientGroupFormVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 16:17
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = SysConfigGroup.class)
 public class ConfigGroupFormVO extends BaseEntityMapper {

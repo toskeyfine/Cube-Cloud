@@ -7,10 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * SysConfigGroupMapper
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 16:15
+ * @author toskey
+ * @version 1.0.0
  */
 @Mapper
 public interface SysConfigGroupMapper extends BaseMapper<SysConfigGroup> {

@@ -9,10 +9,8 @@ import java.time.LocalDateTime;
 /**
  * OAuth2ClientQueryResultVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 15:48
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = OAuth2Client.class)
 public class ClientQueryResultVO extends BaseEntityMapper {

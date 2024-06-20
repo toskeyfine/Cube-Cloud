@@ -9,10 +9,8 @@ import java.util.Arrays;
 /**
  * DataScopeConstants
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 15:35
+ * @author toskey
+ * @version 1.0.0
  */
 @Getter
 @AllArgsConstructor

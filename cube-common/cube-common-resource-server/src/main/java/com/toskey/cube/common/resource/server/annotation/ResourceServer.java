@@ -12,10 +12,8 @@ import java.lang.annotation.Target;
 /**
  * ResourceServer
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/6 17:53
+ * @author toskey
+ * @version 1.0.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

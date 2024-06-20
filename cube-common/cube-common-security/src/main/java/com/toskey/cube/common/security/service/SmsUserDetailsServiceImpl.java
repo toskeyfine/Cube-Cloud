@@ -14,10 +14,8 @@ import java.util.Optional;
 /**
  * CubeSmsUserDetailsServiceImpl
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/6 17:13
+ * @author toskey
+ * @version 1.0.0
  */
 public class SmsUserDetailsServiceImpl implements CubeUserDetailsService {
 

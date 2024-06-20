@@ -1,6 +1,6 @@
 package com.toskey.cube.common.security;
 
-import com.toskey.cube.common.security.component.CubeAccessDeniedHandler;
+import com.toskey.cube.common.security.component.RequestAccessDeniedHandler;
 import com.toskey.cube.common.security.component.RedisAuthorizationService;
 import com.toskey.cube.common.security.component.RedisRegisteredClientRepository;
 import com.toskey.cube.common.security.service.PasswordUserDetailsServiceImpl;
@@ -15,10 +15,8 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 /**
  * SecurityAutoConfiguration
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/6 17:45
+ * @author toskey
+ * @version 1.0.0
  */
 public class SecurityAutoConfiguration {
 
@@ -34,8 +32,8 @@ public class SecurityAutoConfiguration {
     }
 
     @Bean
-    public CubeAccessDeniedHandler accessDeniedHandler() {
-        return new CubeAccessDeniedHandler();
+    public RequestAccessDeniedHandler requestAccessDeniedHandler() {
+        return new RequestAccessDeniedHandler();
     }
 
     @Bean

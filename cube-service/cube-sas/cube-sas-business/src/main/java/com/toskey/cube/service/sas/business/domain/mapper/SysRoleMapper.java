@@ -10,10 +10,8 @@ import java.util.List;
 /**
  * SysRoleMapper
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 15:49
+ * @author toskey
+ * @version 1.0.0
  */
 @Mapper
 public interface SysRoleMapper extends BaseMapper<SysRole> {

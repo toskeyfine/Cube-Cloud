@@ -8,10 +8,8 @@ import java.lang.annotation.Target;
 /**
  * DataScope
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 10:57
+ * @author toskey
+ * @version 1.0.0
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

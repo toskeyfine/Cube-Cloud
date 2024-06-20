@@ -7,10 +7,8 @@ import com.toskey.cube.service.log.business.domain.entity.OperationLog;
 /**
  * OperationLogQueryVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/13 17:27
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = OperationLog.class)
 public class OperationLogQueryVO extends BaseEntityMapper {

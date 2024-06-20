@@ -25,10 +25,8 @@ import java.util.List;
 /**
  * SysDeptService
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 15:51
+ * @author toskey
+ * @version 1.0.0
  */
 @Slf4j
 @Service

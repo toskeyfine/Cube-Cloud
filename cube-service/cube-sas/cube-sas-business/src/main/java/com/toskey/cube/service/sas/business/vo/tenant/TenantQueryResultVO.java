@@ -9,10 +9,8 @@ import java.time.LocalDateTime;
 /**
  * TenantQueryResultVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/13 13:28
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = SysTenant.class)
 public class TenantQueryResultVO extends BaseEntityMapper {

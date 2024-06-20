@@ -1,6 +1,5 @@
 package com.toskey.cube.common.cache.event;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -12,29 +11,32 @@ import java.util.concurrent.TimeUnit;
 /**
  * ClearCacheEventListener
  *
- * @author zhongxing
- * @date 2023/8/10 17:06
+ * @author toskey
+ * @version 1.0.0
  */
-@RequiredArgsConstructor
 public class ClearCacheEventListener {
 
     private final RedisTemplate<String, Object> redisTemplate;
+
+    public ClearCacheEventListener(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     @Async
     @Order
     @EventListener(ClearCacheEvent.class)
     public void clearCache(ClearCacheEvent event) throws InterruptedException {
-        Long delay = event.getDelay();
+        Long delay = event.delay();
         if (Objects.isNull(delay)) {
             delay = 500L;
         }
-        TimeUnit timeUnit = event.getTimeUnit();
+        TimeUnit timeUnit = event.timeUnit();
         if (Objects.isNull(timeUnit)) {
             timeUnit = TimeUnit.MILLISECONDS;
         }
 
         timeUnit.sleep(delay);
 
-        redisTemplate.delete(event.getKey());
+        redisTemplate.delete(event.key());
     }
 }

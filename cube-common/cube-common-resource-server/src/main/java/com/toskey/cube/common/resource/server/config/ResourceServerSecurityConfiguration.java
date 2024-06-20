@@ -2,7 +2,7 @@ package com.toskey.cube.common.resource.server.config;
 
 import com.toskey.cube.common.resource.server.component.CubeBearerTokenResolver;
 import com.toskey.cube.common.resource.server.component.ResourceServerExceptionEntryPoint;
-import com.toskey.cube.common.security.component.CubeAccessDeniedHandler;
+import com.toskey.cube.common.security.component.RequestAccessDeniedHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -16,16 +16,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 /**
  * ResourceServerConfiguration
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/6 17:23
+ * @author toskey
+ * @version 1.0.0
  */
 @RequiredArgsConstructor
 @EnableConfigurationProperties(AuthIgnoreProperties.class)
 public class ResourceServerSecurityConfiguration {
 
-    private final CubeAccessDeniedHandler accessDeniedHandler;
+    private final RequestAccessDeniedHandler accessDeniedHandler;
 
     private final CubeBearerTokenResolver bearerTokenResolver;
 

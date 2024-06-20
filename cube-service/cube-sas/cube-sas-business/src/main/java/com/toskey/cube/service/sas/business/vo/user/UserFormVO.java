@@ -13,10 +13,8 @@ import java.util.List;
 /**
  * UserFormVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/12 15:39
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = SysUser.class)
 public class UserFormVO extends BaseEntityMapper {

@@ -11,6 +11,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * RedisTemplate 配置
+ *
+ * @author toskey
+ * @version 1.0.0
  */
 @EnableCaching
 @AutoConfigureBefore(name = { "org.redisson.spring.starter.RedissonAutoConfiguration",

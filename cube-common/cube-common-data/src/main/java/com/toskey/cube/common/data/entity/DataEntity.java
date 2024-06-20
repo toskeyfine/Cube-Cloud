@@ -12,10 +12,8 @@ import java.time.LocalDateTime;
 /**
  * DataEntity
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 10:54
+ * @author toskey
+ * @version 1.0.0
  */
 @Getter
 @Setter

@@ -26,10 +26,8 @@ import java.util.Map;
 /**
  * CubeOpaqueTokenIntrospector
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/6 10:40
+ * @author toskey
+ * @version 1.0.0
  */
 @RequiredArgsConstructor
 public class CubeOpaqueTokenIntrospector implements OpaqueTokenIntrospector {

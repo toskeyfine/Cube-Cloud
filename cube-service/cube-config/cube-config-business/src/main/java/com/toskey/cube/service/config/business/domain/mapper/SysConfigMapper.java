@@ -7,10 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * SysConfigMapper
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 17:35
+ * @author toskey
+ * @version 1.0.0
  */
 @Mapper
 public interface SysConfigMapper extends BaseMapper<SysConfig> {

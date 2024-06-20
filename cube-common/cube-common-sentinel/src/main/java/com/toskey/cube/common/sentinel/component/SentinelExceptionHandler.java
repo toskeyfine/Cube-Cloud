@@ -13,12 +13,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 
 /**
- * SentinelExceptionHandler
+ * Sentinel异常处理
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/19 10:33
+ * @author toskey
+ * @version 1.0.0
  */
 public class SentinelExceptionHandler implements BlockExceptionHandler {
 

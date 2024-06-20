@@ -9,10 +9,8 @@ import java.time.LocalDateTime;
 /**
  * LoginLogQueryResultVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/13 17:26
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = LoginLog.class)
 public class LoginLogQueryResultVO extends BaseEntityMapper {

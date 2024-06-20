@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * EntityMapper
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

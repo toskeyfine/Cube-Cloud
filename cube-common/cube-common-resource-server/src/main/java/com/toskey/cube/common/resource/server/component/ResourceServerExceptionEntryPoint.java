@@ -18,10 +18,8 @@ import java.io.PrintWriter;
 /**
  * ResourceServerExceptionEntryPoint
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/6 17:47
+ * @author toskey
+ * @version 1.0.0
  */
 public class ResourceServerExceptionEntryPoint implements AuthenticationEntryPoint {
     @Override

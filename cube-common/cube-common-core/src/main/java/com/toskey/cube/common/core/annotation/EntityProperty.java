@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * EntityProperty
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

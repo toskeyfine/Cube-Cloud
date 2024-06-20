@@ -4,7 +4,7 @@ package com.toskey.cube.common.core.constant;
  * CommonConstants
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 public interface CommonConstants {
 

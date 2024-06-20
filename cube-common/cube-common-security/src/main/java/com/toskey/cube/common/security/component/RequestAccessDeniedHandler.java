@@ -14,12 +14,10 @@ import java.io.IOException;
 /**
  * CubeAccessDeniedHandler
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/6 10:16
+ * @author toskey
+ * @version 1.0.0
  */
-public class CubeAccessDeniedHandler implements AccessDeniedHandler {
+public class RequestAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {

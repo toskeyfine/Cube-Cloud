@@ -24,6 +24,9 @@ import java.util.Map;
 
 /**
  * 扩展redis-cache支持注解cacheName添加超时时间
+ *
+ * @author toskey
+ * @version 1.0.0
  */
 @AutoConfigureAfter({RedisAutoConfiguration.class})
 @EnableConfigurationProperties(CacheProperties.class)

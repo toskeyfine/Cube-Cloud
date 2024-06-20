@@ -9,10 +9,8 @@ import org.springframework.cloud.openfeign.FallbackFactory;
 /**
  * RemoteLogServiceFallbackFactory
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/13 17:14
+ * @author toskey
+ * @version 1.0.0
  */
 public class RemoteLogServiceFallbackFactory implements FallbackFactory<RemoteLogService> {
     @Override

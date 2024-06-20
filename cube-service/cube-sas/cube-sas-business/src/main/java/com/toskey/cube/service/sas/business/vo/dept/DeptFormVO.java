@@ -10,10 +10,8 @@ import jakarta.validation.constraints.Size;
 /**
  * DeptFormVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/12 15:39
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = SysDept.class)
 public class DeptFormVO extends BaseEntityMapper {

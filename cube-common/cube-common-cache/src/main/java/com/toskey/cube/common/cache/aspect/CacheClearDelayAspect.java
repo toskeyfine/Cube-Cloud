@@ -3,8 +3,6 @@ package com.toskey.cube.common.cache.aspect;
 import com.toskey.cube.common.cache.annotation.CacheClearDelay;
 import com.toskey.cube.common.cache.event.ClearCacheEvent;
 import com.toskey.cube.common.core.util.SpelParser;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -23,14 +21,16 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0
  */
 @Aspect
-@RequiredArgsConstructor
 public class CacheClearDelayAspect {
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    @SneakyThrows
+    public CacheClearDelayAspect(ApplicationEventPublisher applicationEventPublisher) {
+        this.applicationEventPublisher = applicationEventPublisher;
+    }
+
     @Around("@annotation(com.toskey.cube.common.cache.annotation.CacheClearDelay)")
-    public Object doCacheClearDelay(ProceedingJoinPoint point) {
+    public Object doCacheClearDelay(ProceedingJoinPoint point) throws Throwable {
         Signature signature = point.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
         Method targetMethod = methodSignature.getMethod();
@@ -52,7 +52,7 @@ public class CacheClearDelayAspect {
         String keyPrefix = annotation.prefix();
 
         final String cacheKey = keyPrefix + key;
-        applicationEventPublisher.publishEvent(ClearCacheEvent.of(cacheKey, delayTime, timeUnit));
+        applicationEventPublisher.publishEvent(new ClearCacheEvent(cacheKey, delayTime, timeUnit));
 
         return ret;
     }

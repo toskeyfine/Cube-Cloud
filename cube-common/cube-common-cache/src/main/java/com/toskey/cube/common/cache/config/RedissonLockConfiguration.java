@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Bean;
 /**
  * 分布式锁配置类
  *
- * @author lish
- * @date 2023/10/24 10:42
+ * @author toskey
+ * @version 1.0.0
  */
 public class RedissonLockConfiguration {
 

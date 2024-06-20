@@ -10,10 +10,8 @@ import org.springframework.security.oauth2.server.resource.introspection.OpaqueT
 /**
  * ResourceServerAutoConfiguration
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/6 17:23
+ * @author toskey
+ * @version 1.0.0
  */
 public class ResourceServerAutoConfiguration {
 

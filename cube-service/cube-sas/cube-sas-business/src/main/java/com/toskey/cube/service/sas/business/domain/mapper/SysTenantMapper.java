@@ -7,10 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * SysTenantMapper
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 15:50
+ * @author toskey
+ * @version 1.0.0
  */
 @Mapper
 public interface SysTenantMapper extends BaseMapper<SysTenant> {

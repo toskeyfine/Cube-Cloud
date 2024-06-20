@@ -12,10 +12,8 @@ import org.hibernate.validator.constraints.Length;
 /**
  * MenuFormVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/13 13:23
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = SysMenu.class)
 public class MenuFormVO extends BaseEntityMapper {

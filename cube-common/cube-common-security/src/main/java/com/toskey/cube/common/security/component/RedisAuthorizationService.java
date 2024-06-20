@@ -18,10 +18,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * RedisAuthorizationService
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 10:42
+ * @author toskey
+ * @version 1.0.0
  */
 public class RedisAuthorizationService implements OAuth2AuthorizationService {
 

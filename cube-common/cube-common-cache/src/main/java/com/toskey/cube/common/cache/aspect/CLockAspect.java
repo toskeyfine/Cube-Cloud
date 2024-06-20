@@ -4,7 +4,6 @@ import com.toskey.cube.common.cache.annotation.CLock;
 import com.toskey.cube.common.cache.component.CubeLock;
 import com.toskey.cube.common.cache.component.IDistributedLock;
 import com.toskey.cube.common.core.util.SpelParser;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -21,10 +20,13 @@ import java.lang.reflect.Method;
  * @version 1.0.0
  */
 @Aspect
-@RequiredArgsConstructor
 public class CLockAspect {
 
     private final IDistributedLock distributedLock;
+
+    public CLockAspect(IDistributedLock distributedLock) {
+        this.distributedLock = distributedLock;
+    }
 
     @Around("@annotation(com.toskey.cube.common.cache.annotation.CLock)")
     public Object around(ProceedingJoinPoint point) throws Throwable {

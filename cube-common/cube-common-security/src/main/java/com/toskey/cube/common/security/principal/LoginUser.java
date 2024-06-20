@@ -1,6 +1,5 @@
 package com.toskey.cube.common.security.principal;
 
-import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
@@ -12,12 +11,9 @@ import java.util.Map;
 /**
  * LoginUser
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/6 10:03
+ * @author toskey
+ * @version 1.0.0
  */
-@Getter
 public class LoginUser extends User implements OAuth2AuthenticatedPrincipal {
 
     private final String id;
@@ -55,6 +51,38 @@ public class LoginUser extends User implements OAuth2AuthenticatedPrincipal {
         this.dept = dept;
         this.post = post;
         this.tenantId = tenantId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getDept() {
+        return dept;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public String getTenantId() {
+        return tenantId;
     }
 
     @Override

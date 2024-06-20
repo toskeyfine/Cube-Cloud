@@ -12,7 +12,7 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
  * SpelParser
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 public final class SpelParser {
 

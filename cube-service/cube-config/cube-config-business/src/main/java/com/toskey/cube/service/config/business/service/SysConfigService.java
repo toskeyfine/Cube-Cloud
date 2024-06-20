@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 /**
  * SysConfigService
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 17:43
+ * @author toskey
+ * @version 1.0.0
  */
 @Slf4j
 @Service

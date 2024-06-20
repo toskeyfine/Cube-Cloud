@@ -17,7 +17,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
 /**
- * redis cache 扩展cache name自动化配置
+ * 扩展cache name自动化配置
+ *
+ * @author toskey
+ * @version 1.0.0
  */
 @Slf4j
 public class RedisAutoCacheManager extends RedisCacheManager {

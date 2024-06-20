@@ -11,10 +11,8 @@ import org.springframework.context.annotation.Bean;
 /**
  * MybatisPlusConfiguration
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 11:10
+ * @author toskey
+ * @version 1.0.0
  */
 public class MybatisPlusConfiguration {
 

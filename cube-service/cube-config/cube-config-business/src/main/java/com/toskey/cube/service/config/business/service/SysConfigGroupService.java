@@ -23,10 +23,8 @@ import java.util.List;
 /**
  * SysConfigGroupService
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 16:16
+ * @author toskey
+ * @version 1.0.0
  */
 @Service
 public class SysConfigGroupService extends ServiceImpl<SysConfigGroupMapper, SysConfigGroup> implements IService<SysConfigGroup> {

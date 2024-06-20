@@ -12,10 +12,8 @@ import java.util.List;
 /**
  * MenuQueryResultVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/13 13:24
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = SysMenu.class)
 public class MenuQueryResultVO extends BaseEntityMapper {

@@ -7,10 +7,8 @@ import com.toskey.cube.service.config.business.domain.entity.SysConfig;
 /**
  * ClientQueryVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 16:17
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = SysConfig.class)
 public class ConfigQueryVO extends BaseEntityMapper {

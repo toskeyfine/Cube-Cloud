@@ -11,10 +11,8 @@ import java.util.Date;
 /**
  * AccessTokenRepository
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/6 16:44
+ * @author toskey
+ * @version 1.0.0
  */
 @RequiredArgsConstructor
 public class RedisTokenRepository implements PersistentTokenRepository {

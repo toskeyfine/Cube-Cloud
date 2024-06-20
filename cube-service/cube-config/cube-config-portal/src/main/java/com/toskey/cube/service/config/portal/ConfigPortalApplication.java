@@ -10,10 +10,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 /**
  * ConfigPortalApplication
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 15:59
+ * @author toskey
+ * @version 1.0.0
  */
 @EnableFeignClients(basePackages = "com.toskey.cube")
 @ResourceServer

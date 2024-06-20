@@ -24,12 +24,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * TenantInterceptor
+ * Mybatis-plus的租户拦截器
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 15:00
+ * @author toskey
+ * @version 1.0.0
  */
 public class TenantMybatisInterceptor extends JsqlParserSupport implements InnerInterceptor {
 

@@ -10,10 +10,8 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 /**
  * RedisRegisteredClientRepository
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/6 17:02
+ * @author toskey
+ * @version 1.0.0
  */
 @RequiredArgsConstructor
 public class RedisRegisteredClientRepository implements RegisteredClientRepository {

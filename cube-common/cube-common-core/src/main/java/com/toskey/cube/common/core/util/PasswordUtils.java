@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * PasswordUtils
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 public class PasswordUtils {
 

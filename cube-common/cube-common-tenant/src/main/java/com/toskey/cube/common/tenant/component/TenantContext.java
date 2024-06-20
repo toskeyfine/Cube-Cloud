@@ -3,12 +3,10 @@ package com.toskey.cube.common.tenant.component;
 import jakarta.annotation.Nonnull;
 
 /**
- * TenantContext
+ * 租户上下文
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 16:19
+ * @author toskey
+ * @version 1.0.0
  */
 public final class TenantContext {
 

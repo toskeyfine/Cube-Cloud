@@ -6,10 +6,8 @@ import com.toskey.cube.common.data.entity.DataEntity;
 /**
  * SysConfigGroup
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 16:13
+ * @author toskey
+ * @version 1.0.0
  */
 @TableName("sys_config_group")
 public class SysConfigGroup extends DataEntity {

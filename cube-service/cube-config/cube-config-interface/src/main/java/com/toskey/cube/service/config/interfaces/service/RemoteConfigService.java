@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * RemoteConfigService
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 16:31
+ * @author toskey
+ * @version 1.0.0
  */
 @FeignClient(
         contextId = "remoteConfigService",

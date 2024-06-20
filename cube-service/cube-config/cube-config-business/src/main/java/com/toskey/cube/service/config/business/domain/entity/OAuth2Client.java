@@ -17,10 +17,8 @@ import java.util.Arrays;
 /**
  * OAuth2Client
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 17:33
+ * @author toskey
+ * @version 1.0.0
  */
 @TableName("sys_oauth2_client")
 public class OAuth2Client extends DataEntity {

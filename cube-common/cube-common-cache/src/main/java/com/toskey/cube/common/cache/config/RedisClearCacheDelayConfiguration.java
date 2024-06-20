@@ -9,13 +9,16 @@ import org.springframework.data.redis.core.RedisTemplate;
 /**
  * RedisClearCacheDelayConfiguration
  *
- * @author zhongxing
- * @date 2023/8/10 17:19
+ * @author toskey
+ * @version 1.0.0
  */
-@RequiredArgsConstructor
 public class RedisClearCacheDelayConfiguration {
 
     private final RedisTemplate<String, Object> redisTemplate;
+
+    public RedisClearCacheDelayConfiguration(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     @Bean
     @ConditionalOnMissingBean

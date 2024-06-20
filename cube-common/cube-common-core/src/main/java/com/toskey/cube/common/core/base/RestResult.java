@@ -7,8 +7,8 @@ import java.io.Serializable;
 /**
  * restful api response model
  *
- * @version 1.0.0
  * @author toskey
+ * @version 1.0.0
  */
 public final class RestResult<T> implements Serializable {
 

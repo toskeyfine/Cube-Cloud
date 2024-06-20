@@ -10,10 +10,8 @@ import java.util.List;
 /**
  * SysMenu
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 15:25
+ * @author toskey
+ * @version 1.0.0
  */
 @TableName("sys_menu")
 public class SysMenu extends DataEntity {

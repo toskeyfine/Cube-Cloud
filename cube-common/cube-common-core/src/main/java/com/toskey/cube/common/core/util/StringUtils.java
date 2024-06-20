@@ -9,7 +9,7 @@ import java.util.Set;
  * StringUtils
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
 

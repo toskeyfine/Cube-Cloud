@@ -8,10 +8,8 @@ import java.time.LocalDateTime;
 /**
  * LoginLogDTO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/13 17:12
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper
 public class LoginLogDTO extends BaseEntityMapper {

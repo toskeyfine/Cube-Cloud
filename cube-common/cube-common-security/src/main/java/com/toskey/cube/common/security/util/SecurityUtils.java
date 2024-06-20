@@ -15,15 +15,15 @@ import java.util.Objects;
 /**
  * 身份认证工具类
  *
- * @author lis
+ * @author toskey
+ * @version 1.0.0
  */
-@UtilityClass
 public class SecurityUtils {
 
 	/**
 	 * 获取Authentication
 	 */
-	public Authentication getAuthentication() {
+	public static Authentication getAuthentication() {
 		return SecurityContextHolder.getContext().getAuthentication();
 	}
 
@@ -34,7 +34,7 @@ public class SecurityUtils {
 	 *
 	 * @return OAuth2User
 	 */
-	public LoginUser getUser(Authentication authentication) {
+	public static LoginUser getUser(Authentication authentication) {
 		if (authentication != null) {
 			Object principal = authentication.getPrincipal();
 			if (principal instanceof LoginUser) {
@@ -47,16 +47,16 @@ public class SecurityUtils {
 	/**
 	 * 获取用户
 	 */
-	public LoginUser getUser() {
+	public static LoginUser getUser() {
 		Authentication authentication = getAuthentication();
 		return getUser(authentication);
 	}
 
-	public String getUsername() {
+	public static String getUsername() {
 		return Objects.nonNull(getUser()) ? getUser().getUsername() : null;
 	}
 
-	public String getUserId() {
+	public static String getUserId() {
 		return Objects.nonNull(getUser()) ? getUser().getId() : null;
 	}
 
@@ -64,7 +64,7 @@ public class SecurityUtils {
 	 * 获取用户角色信息
 	 * @return 角色集合
 	 */
-	public List<String> getRoles() {
+	public static List<String> getRoles() {
 		Authentication authentication = getAuthentication();
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 

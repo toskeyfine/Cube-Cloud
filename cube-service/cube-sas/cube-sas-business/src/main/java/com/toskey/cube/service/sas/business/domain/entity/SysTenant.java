@@ -8,10 +8,8 @@ import java.time.LocalDateTime;
 /**
  * SysTenant
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 15:27
+ * @author toskey
+ * @version 1.0.0
  */
 @TableName("sys_tenant")
 public class SysTenant extends DataEntity {

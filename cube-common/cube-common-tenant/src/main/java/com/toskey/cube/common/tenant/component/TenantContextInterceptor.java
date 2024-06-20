@@ -6,12 +6,10 @@ import feign.RequestTemplate;
 import java.util.Optional;
 
 /**
- * TenantContextInterceptor
+ * Feign调用时租户上下文传递
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 16:48
+ * @author toskey
+ * @version 1.0.0
  */
 public class TenantContextInterceptor implements RequestInterceptor {
     @Override

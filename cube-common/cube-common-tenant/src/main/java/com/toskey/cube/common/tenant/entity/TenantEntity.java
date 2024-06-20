@@ -12,10 +12,8 @@ import java.time.LocalDateTime;
 /**
  * TenantEntity
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 15:01
+ * @author toskey
+ * @version 1.0.0
  */
 public class TenantEntity extends BaseEntity {
 

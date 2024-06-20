@@ -13,12 +13,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.GenericFilterBean;
 
 /**
- * TenantAutoConfiguration
+ * 自动装配
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 14:55
+ * @author toskey
+ * @version 1.0.0
  */
 @AutoConfigureAfter(name = { "com.toskey.common.data.mybatis.config.MybatisPlusConfiguration" })
 @RequiredArgsConstructor

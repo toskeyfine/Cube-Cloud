@@ -21,10 +21,8 @@ import java.util.Optional;
 /**
  * DataScopeInterceptor
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 10:58
+ * @author toskey
+ * @version 1.0.0
  */
 @RequiredArgsConstructor
 public class DataScopeInterceptor extends JsqlParserSupport implements InnerInterceptor {

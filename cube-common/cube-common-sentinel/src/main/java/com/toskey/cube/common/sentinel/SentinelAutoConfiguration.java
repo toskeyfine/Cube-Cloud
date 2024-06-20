@@ -15,12 +15,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 
 /**
- * SentinelAutoConfiguration
+ * 自动装配
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/19 14:31
+ * @author toskey
+ * @version 1.0.0
  */
 @AutoConfigureBefore({ SentinelFeignAutoConfiguration.class })
 public class SentinelAutoConfiguration {

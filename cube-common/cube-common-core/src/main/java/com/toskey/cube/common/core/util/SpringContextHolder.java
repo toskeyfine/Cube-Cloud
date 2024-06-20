@@ -1,7 +1,6 @@
 package com.toskey.cube.common.core.util;
 
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
@@ -20,15 +19,13 @@ import java.util.Map;
  * SpringContextHolder
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
-@Slf4j
 @Lazy(false)
 public class SpringContextHolder implements BeanFactoryPostProcessor, ApplicationContextAware, DisposableBean {
 
     private static ConfigurableListableBeanFactory beanFactory;
 
-    @Getter
     private static ApplicationContext applicationContext = null;
 
     /**
@@ -77,9 +74,6 @@ public class SpringContextHolder implements BeanFactoryPostProcessor, Applicatio
      * 清除SpringContextHolder中的ApplicationContext为Null.
      */
     public static void clearHolder() {
-        if (log.isDebugEnabled()) {
-            log.debug("清除SpringContextHolder中的ApplicationContext:" + applicationContext);
-        }
         applicationContext = null;
     }
 
@@ -106,4 +100,7 @@ public class SpringContextHolder implements BeanFactoryPostProcessor, Applicatio
         SpringContextHolder.clearHolder();
     }
 
+    public static ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
 }

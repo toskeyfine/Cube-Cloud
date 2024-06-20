@@ -7,10 +7,8 @@ import com.toskey.cube.service.sas.business.domain.entity.SysPost;
 /**
  * PostQueryVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/13 13:23
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = SysPost.class)
 public class PostQueryVO extends BaseEntityMapper {

@@ -9,10 +9,8 @@ import jakarta.validation.constraints.NotBlank;
 /**
  * PermissionBindVO
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/12 17:37
+ * @author toskey
+ * @version 1.0.0
  */
 @EntityMapper(entity = SysRole.class)
 public class PermissionBindVO extends BaseEntityMapper {

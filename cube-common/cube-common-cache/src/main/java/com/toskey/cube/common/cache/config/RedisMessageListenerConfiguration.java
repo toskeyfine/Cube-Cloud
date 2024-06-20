@@ -7,6 +7,9 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 
 /**
  * redis message 信道相关配置
+ *
+ * @author toskey
+ * @version 1.0.0
  */
 public class RedisMessageListenerConfiguration {
 

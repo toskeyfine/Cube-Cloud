@@ -11,23 +11,26 @@ import org.springframework.context.annotation.Bean;
 /**
  * RedissonConfiguration
  *
- * @author zhongxing
- * @date 2023/10/24 10:34
+ * @author toskey
+ * @version 1.0.0
  */
-@RequiredArgsConstructor
 @EnableConfigurationProperties(RedissonClientProperties.class)
 public class RedissonClientConfiguration {
 
     private final RedissonClientProperties redissonClientProperties;
+
+    public RedissonClientConfiguration(RedissonClientProperties redissonClientProperties) {
+        this.redissonClientProperties = redissonClientProperties;
+    }
 
     @Bean(destroyMethod = "shutdown")
     @ConditionalOnMissingBean
     public RedissonClient redissonClient() {
         Config config = new Config();
         config.useSingleServer()
-                .setAddress(String.format("redis://%s:%s", redissonClientProperties.getHost(), redissonClientProperties.getPort()))
-                .setPassword(redissonClientProperties.getPassword())
-                .setDatabase(redissonClientProperties.getDatabase());
+                .setAddress(String.format("redis://%s:%s", redissonClientProperties.host(), redissonClientProperties.port()))
+                .setPassword(redissonClientProperties.password())
+                .setDatabase(redissonClientProperties.database());
         return Redisson.create(config);
     }
 

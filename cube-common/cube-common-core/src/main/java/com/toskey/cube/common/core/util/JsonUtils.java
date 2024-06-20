@@ -18,9 +18,8 @@ import java.util.Map;
  * JsonUtils
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
-@UtilityClass
 public final class JsonUtils {
 
     private static ObjectMapper objectMapper = SpringContextHolder.getBean(ObjectMapper.class);
@@ -33,7 +32,7 @@ public final class JsonUtils {
         objectMapper.configure(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN, true);
     }
 
-    public <T> T toJavaObject(String json, Class<T> cls) {
+    public static <T> T toJavaObject(String json, Class<T> cls) {
         if (StringUtils.isBlank(json) || cls == null) {
             return null;
         }
@@ -44,7 +43,7 @@ public final class JsonUtils {
         }
     }
 
-    public <T> T toJavaObject(String json, TypeReference<T> typeRef) {
+    public static <T> T toJavaObject(String json, TypeReference<T> typeRef) {
         if (StringUtils.isBlank(json) || typeRef == null) {
             return null;
         }
@@ -55,7 +54,7 @@ public final class JsonUtils {
         }
     }
 
-    public Map toMap(String json) {
+    public static Map toMap(String json) {
         if (StringUtils.isBlank(json)) {
             return null;
         }
@@ -66,7 +65,7 @@ public final class JsonUtils {
         }
     }
 
-    public <K, V> Map<K, V> toMap(String json, Class<K> kc, Class<V> vc) {
+    public static <K, V> Map<K, V> toMap(String json, Class<K> kc, Class<V> vc) {
         if (StringUtils.isBlank(json)) {
             return null;
         }
@@ -78,7 +77,7 @@ public final class JsonUtils {
         }
     }
 
-    public <T> List<T> toList(String json, TypeReference<List<T>> typeRef) {
+    public static <T> List<T> toList(String json, TypeReference<List<T>> typeRef) {
         try {
             return objectMapper.readValue(json, typeRef);
         } catch (JsonProcessingException e) {
@@ -86,7 +85,7 @@ public final class JsonUtils {
         }
     }
 
-    public <T> List<T> toList(String json, Class<T> clazz) {
+    public static <T> List<T> toList(String json, Class<T> clazz) {
         try {
             JavaType javaType = objectMapper.getTypeFactory().constructParametricType(List.class, clazz);
             return objectMapper.readValue(json, javaType);
@@ -95,7 +94,7 @@ public final class JsonUtils {
         }
     }
 
-    public JsonNode toTree(String json) {
+    public static JsonNode toTree(String json) {
         try {
             return objectMapper.readTree(json);
         } catch (JsonProcessingException e) {
@@ -103,7 +102,7 @@ public final class JsonUtils {
         }
     }
 
-    public String toJson(Object obj) {
+    public static String toJson(Object obj) {
         try {
             return objectMapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
@@ -111,7 +110,7 @@ public final class JsonUtils {
         }
     }
 
-    public String toJsonPretty(Object obj) {
+    public static String toJsonPretty(Object obj) {
         try {
             return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
         } catch (JsonProcessingException e) {
@@ -119,23 +118,23 @@ public final class JsonUtils {
         }
     }
 
-    public boolean isJson(String json) {
+    public static boolean isJson(String json) {
         return isJsonObject(json) && isJsonArray(json);
     }
 
-    public boolean isJsonObject(String json) {
+    public static boolean isJsonObject(String json) {
         return StringUtils.isNotBlank(json) && json.matches(JSON_OBJECT_PATTERN);
     }
 
-    public boolean isJsonArray(String json) {
+    public static boolean isJsonArray(String json) {
         return StringUtils.isNotBlank(json) && json.matches(JSON_ARRAY_PATTERN);
     }
 
-    public JsonBuilder builder() {
+    public static JsonBuilder builder() {
         return new JsonBuilder();
     }
 
-    public class JsonBuilder {
+    public static class JsonBuilder {
         private final Map<String, Object> map = new HashMap<>();
 
         private Boolean pretty = Boolean.FALSE;

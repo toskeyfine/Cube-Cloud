@@ -13,21 +13,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 /**
  * RemoteUserService
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 16:04
+ * @author toskey
+ * @version 1.0.0
  */
-@FeignClient(contextId = "remoteUserService", value = ServiceNameConstants.SERVICE_SAS, fallbackFactory = RemoteUserServiceFallbackFactory.class)
+@FeignClient(
+        contextId = "remoteUserService",
+        value = ServiceNameConstants.SERVICE_SAS,
+        path = CommonConstants.FEIGN_SERVICE_PATH_PREFIX,
+        fallbackFactory = RemoteUserServiceFallbackFactory.class
+)
 public interface RemoteUserService {
 
-    @GetMapping(CommonConstants.FEIGN_SERVICE_PATH_PREFIX + "/user/account/{username}")
+    @GetMapping("/user/account/{username}")
     RestResult<UserDTO> loadUserByUsername(@PathVariable("username") String username);
 
-    @GetMapping(CommonConstants.FEIGN_SERVICE_PATH_PREFIX + "/user/mobile/{mobile}")
+    @GetMapping("/user/mobile/{mobile}")
     RestResult<UserDTO> loadUserByMobile(@PathVariable("mobile") String mobile);
 
-    @PostMapping(CommonConstants.FEIGN_SERVICE_PATH_PREFIX + "/user/{username}/locked")
+    @PostMapping("/user/{username}/locked")
     RestResult<Boolean> lock(@PathVariable("username") String username);
 
 }

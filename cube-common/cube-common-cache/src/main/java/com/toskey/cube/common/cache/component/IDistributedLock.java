@@ -5,8 +5,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * 分布式锁接口
  *
- * @author lish
- * @date 2023/10/24 10:39
+ * @author toskey
+ * @version 1.0.0
  */
 public interface IDistributedLock {
 

@@ -10,6 +10,9 @@ import java.util.List;
 
 /**
  * CacheManagerCustomizers配置
+ *
+ * @author toskey
+ * @version 1.0.0
  */
 @ConditionalOnMissingBean(CacheManagerCustomizers.class)
 public class RedisCacheManagerConfiguration {

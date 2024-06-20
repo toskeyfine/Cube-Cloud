@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * 分布式锁实现
  *
- * @author lish
- * @date 2023/10/24 10:40
+ * @author toskey
+ * @version 1.0.0
  * @code
  * private final IDistributedLock distributedLock;<br>
  *      try (ZxLock lock = distributedLock.lock("key")) {
@@ -25,10 +25,13 @@ import java.util.concurrent.TimeUnit;
  *      <br>
  *      }
  */
-@AllArgsConstructor
 public class DefaultDistributedLock implements IDistributedLock {
 
     private final RedissonClient redissonClient;
+
+    public DefaultDistributedLock(RedissonClient redissonClient) {
+        this.redissonClient = redissonClient;
+    }
 
     @Override
     public CubeLock lock(String key) {

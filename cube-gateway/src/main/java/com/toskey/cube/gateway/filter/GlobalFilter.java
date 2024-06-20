@@ -9,12 +9,10 @@ import reactor.core.publisher.Mono;
 import java.util.Collections;
 
 /**
- * GlobalFilter
+ * 全局公共过滤器
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/18 16:06
+ * @author toskey
+ * @version 1.0.0
  */
 public class GlobalFilter implements org.springframework.cloud.gateway.filter.GlobalFilter, Ordered {
     @Override

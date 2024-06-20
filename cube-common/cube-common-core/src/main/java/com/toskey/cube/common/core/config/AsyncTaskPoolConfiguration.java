@@ -1,7 +1,5 @@
 package com.toskey.cube.common.core.config;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
@@ -14,9 +12,8 @@ import java.util.concurrent.ThreadPoolExecutor;
  * AsyncTaskPoolConfiguration
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
-@Slf4j
 @EnableConfigurationProperties(AsyncTaskPoolProperties.class)
 public class AsyncTaskPoolConfiguration implements AsyncConfigurer {
 

@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 /**
  * RemoteLogService
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/13 17:12
+ * @author toskey
+ * @version 1.0.0
  */
 @FeignClient(
         contextId = "remoteLogService",

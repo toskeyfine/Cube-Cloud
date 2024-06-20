@@ -12,7 +12,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * WebUtils
  *
  * @author toskey
- * @version 1.0
+ * @version 1.0.0
  */
 public class WebUtils {
 

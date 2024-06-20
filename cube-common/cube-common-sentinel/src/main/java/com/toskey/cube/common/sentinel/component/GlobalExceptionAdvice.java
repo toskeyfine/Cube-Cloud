@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * GlobalExceptionAdvice
+ * 全局统一异常处理
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/19 10:46
+ * @author toskey
+ * @version 1.0.0
  */
 @RestControllerAdvice
 public class GlobalExceptionAdvice {

@@ -8,8 +8,8 @@ import java.lang.annotation.Target;
 /**
  * Excel读取注解
  *
- * @author lis
- * @date 2023/11/2 14:28
+ * @author toskey
+ * @version 1.0.0
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

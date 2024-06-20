@@ -25,12 +25,10 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- * SentinelFeignEnhancer
+ * SentinelFeign增强
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/19 14:35
+ * @author toskey
+ * @version 1.0.0
  */
 public class EnhanceSentinelFeign {
 

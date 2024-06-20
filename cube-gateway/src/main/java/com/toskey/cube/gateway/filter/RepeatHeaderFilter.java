@@ -9,8 +9,8 @@ import org.springframework.web.server.ServerWebExchange;
 /**
  * 去除重复响应头
  *
- * @author lis
- * @version 1.0
+ * @author toskey
+ * @version 1.0.0
  */
 @Component
 public class RepeatHeaderFilter implements HttpHeadersFilter {

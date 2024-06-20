@@ -10,10 +10,8 @@ import java.util.List;
 /**
  * SysRole
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/6/7 15:25
+ * @author toskey
+ * @version 1.0.0
  */
 @TableName("sys_role")
 public class SysRole extends TenantEntity {
