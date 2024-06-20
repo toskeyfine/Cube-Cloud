@@ -21,6 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 )
 public interface RemoteConfigService {
 
-    @GetMapping("/sys/config/{code}")
+    @GetMapping("/config/{code}")
     RestResult<ConfigDTO> get(@PathVariable("code") String code);
 }
