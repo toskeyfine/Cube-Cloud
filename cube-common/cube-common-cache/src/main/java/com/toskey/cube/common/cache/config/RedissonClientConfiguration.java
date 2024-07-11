@@ -1,5 +1,6 @@
 package com.toskey.cube.common.cache.config;
 
+import com.toskey.cube.common.core.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -28,9 +29,11 @@ public class RedissonClientConfiguration {
     public RedissonClient redissonClient() {
         Config config = new Config();
         config.useSingleServer()
-                .setAddress(String.format("redis://%s:%s", redissonClientProperties.host(), redissonClientProperties.port()))
-                .setPassword(redissonClientProperties.password())
-                .setDatabase(redissonClientProperties.database());
+                .setAddress(String.format("redis://%s:%s", redissonClientProperties.getHost(), redissonClientProperties.getPort()))
+                .setDatabase(redissonClientProperties.getDatabase());
+        if (StringUtils.isNotBlank(redissonClientProperties.getPassword())) {
+            config.useSingleServer().setPassword(redissonClientProperties.getPassword());
+        }
         return Redisson.create(config);
     }
 
