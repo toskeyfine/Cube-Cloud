@@ -12,7 +12,6 @@
     <artifactId>cube-gateway</artifactId>
 
     <name>cube-gateway</name>
-    <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
     <properties>
@@ -33,10 +32,6 @@
         <dependency>
             <groupId>com.toskey</groupId>
             <artifactId>cube-common-sentinel</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.toskey</groupId>
-            <artifactId>cube-config-interface</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

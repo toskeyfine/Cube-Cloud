@@ -10,8 +10,6 @@ import com.toskey.cube.common.core.constant.CommonConstants;
 import com.toskey.cube.common.core.exception.BusinessException;
 import com.toskey.cube.common.core.util.SpringContextHolder;
 import com.toskey.cube.common.core.util.StringUtils;
-import com.toskey.cube.service.config.interfaces.dto.ConfigDTO;
-import com.toskey.cube.service.config.interfaces.service.RemoteConfigService;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -26,10 +24,6 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
-import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 /**
  * 验证码校验处理器
@@ -44,24 +38,16 @@ public class ImageCodeCheckHandler implements HandlerFunction<ServerResponse> {
 
     private final ObjectMapper objectMapper;
 
-    private final RemoteConfigService remoteConfigService;
-
     @SneakyThrows
     @Override
     public Mono<ServerResponse> handle(@Nonnull ServerRequest request) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Future<RestResult<ConfigDTO>> future = executorService.submit(() -> remoteConfigService.get("sys:login:captcha_type"));
-        RestResult<ConfigDTO> result = future.get();
-        executorService.shutdown();
-        if (!Objects.nonNull(result) || result.getCode() != 0) {
-            throw new RuntimeException("获取配置信息失败");
-        }
         return request.bodyToMono(HashMap.class)
-                .flatMap(map -> {
+                .flatMap(body -> {
                     CaptchaVO vo = new CaptchaVO();
-                    vo.setPointJson((String) map.get("pointJson"));
-                    vo.setToken((String) map.get("token"));
-                    vo.setCaptchaType(StringUtils.isNotEmpty(result.getData().getValue()) ? result.getData().getValue() : CommonConstants.CAPTCHA_DEFAULT_TYPE);
+                    vo.setPointJson((String) body.get("pointJson"));
+                    vo.setToken((String) body.get("token"));
+                    String captchaType = (String) body.get("captchaType");
+                    vo.setCaptchaType(StringUtils.isNotBlank(captchaType) ? captchaType : CommonConstants.CAPTCHA_DEFAULT_TYPE);
                     return Mono.just(vo);
                 }).flatMap(captcha -> {
                     CaptchaService captchaService = SpringContextHolder.getBean(CaptchaService.class);
