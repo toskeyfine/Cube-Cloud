@@ -1,5 +1,6 @@
 package com.toskey.cube.common.core.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.toskey.cube.common.core.constant.enums.RestResultCode;
 
 import java.io.Serializable;
@@ -50,6 +51,7 @@ public final class RestResult<T> implements Serializable {
         this.data = data;
     }
 
+    @JsonIgnore
     public boolean isSuccess() {
         return this.code == RestResultCode.SUCCESS.getCode();
     }
