@@ -1,20 +1,20 @@
-package com.toskey.cube.service.sas.business.vo.role;
+package com.toskey.cube.service.sas.interfaces.dto;
 
 import com.toskey.cube.common.core.annotation.EntityMapper;
 import com.toskey.cube.common.core.base.BaseEntityMapper;
-import com.toskey.cube.common.datascope.enums.DataScopeType;
-import com.toskey.cube.service.sas.business.domain.entity.SysRole;
 
 import java.time.LocalDateTime;
 
 /**
- * RoleFormVO
+ * RoleDTO
  *
- * @author toskey
- * @version 1.0.0
+ * @author lis
+ * @version 1.0
+ * @description TODO
+ * @date 2024/7/11 14:25
  */
-@EntityMapper(entity = SysRole.class)
-public class RoleQueryResultVO extends BaseEntityMapper {
+@EntityMapper
+public class RoleDTO extends BaseEntityMapper {
 
     private String id;
 
@@ -28,9 +28,10 @@ public class RoleQueryResultVO extends BaseEntityMapper {
 
     private String status;
 
-    private DataScopeType dataScopeType;
+    private String dataScopeType;
 
     private String[] dataScopeDeptIds;
+
     private String remark;
 
     private String createBy;
@@ -89,6 +90,22 @@ public class RoleQueryResultVO extends BaseEntityMapper {
         this.status = status;
     }
 
+    public String getDataScopeType() {
+        return dataScopeType;
+    }
+
+    public void setDataScopeType(String dataScopeType) {
+        this.dataScopeType = dataScopeType;
+    }
+
+    public String[] getDataScopeDeptIds() {
+        return dataScopeDeptIds;
+    }
+
+    public void setDataScopeDeptIds(String[] dataScopeDeptIds) {
+        this.dataScopeDeptIds = dataScopeDeptIds;
+    }
+
     public String getRemark() {
         return remark;
     }
@@ -127,21 +144,5 @@ public class RoleQueryResultVO extends BaseEntityMapper {
 
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public DataScopeType getDataScopeType() {
-        return dataScopeType;
-    }
-
-    public void setDataScopeType(DataScopeType dataScopeType) {
-        this.dataScopeType = dataScopeType;
-    }
-
-    public String[] getDataScopeDeptIds() {
-        return dataScopeDeptIds;
-    }
-
-    public void setDataScopeDeptIds(String[] dataScopeDeptIds) {
-        this.dataScopeDeptIds = dataScopeDeptIds;
     }
 }

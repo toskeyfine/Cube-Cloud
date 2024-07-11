@@ -2,6 +2,7 @@ package com.toskey.cube.common.datascope.config;
 
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.toskey.cube.common.datascope.component.DataScopeInterceptor;
+import com.toskey.cube.service.sas.interfaces.service.RemoteRoleService;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -22,8 +23,8 @@ public class DataScopeConfiguration {
     }
 
     @Bean
-    public DataScopeInterceptor dataScopeInterceptor() {
-        return new DataScopeInterceptor();
+    public DataScopeInterceptor dataScopeInterceptor(RemoteRoleService remoteRoleService) {
+        return new DataScopeInterceptor(remoteRoleService);
     }
 
 }
