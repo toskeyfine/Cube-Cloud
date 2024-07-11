@@ -5,7 +5,7 @@ import com.toskey.cube.common.core.util.JsonUtils;
 import com.toskey.cube.common.core.util.SpelParser;
 import com.toskey.cube.common.core.util.StringUtils;
 import com.toskey.cube.common.core.util.WebUtils;
-import com.toskey.cube.common.log.annotation.CLog;
+import com.toskey.cube.common.log.annotation.RequestLog;
 import com.toskey.cube.common.log.enums.LogResultType;
 import com.toskey.cube.common.log.event.SaveOperationLogEvent;
 import com.toskey.cube.common.security.util.SecurityUtils;
@@ -31,22 +31,22 @@ import java.util.regex.Pattern;
  * @version 1.0.0
  */
 @Aspect
-public class CLogAspect {
+public class RequestLogAspect {
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    public CLogAspect(final ApplicationEventPublisher applicationEventPublisher) {
+    public RequestLogAspect(final ApplicationEventPublisher applicationEventPublisher) {
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
     @SneakyThrows
-    @Around("@annotation(cLog)")
-    public Object around(ProceedingJoinPoint point, CLog cLog) {
+    @Around("@annotation(requestLog)")
+    public Object around(ProceedingJoinPoint point, RequestLog requestLog) {
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         RequestContextHolder.setRequestAttributes(sra, true);
 
-        String value = cLog.value();
-        String content = cLog.content();
+        String value = requestLog.value();
+        String content = requestLog.content();
 
         if (StringUtils.isNotBlank(content)) {
             String patternStr = "#\\{([^{}]+)\\}";
@@ -63,7 +63,7 @@ public class CLogAspect {
             }
         }
 
-        OperationLogDTO operationLogDTO = buildLog(value, content, cLog.module());
+        OperationLogDTO operationLogDTO = buildLog(value, content, requestLog.module());
         Long startTime = System.currentTimeMillis();
         Object obj;
         try {
