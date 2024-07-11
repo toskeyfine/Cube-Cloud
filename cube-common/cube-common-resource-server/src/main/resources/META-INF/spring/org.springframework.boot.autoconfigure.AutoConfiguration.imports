@@ -1,3 +1,0 @@
-com.toskey.cube.common.security.SecurityAutoConfiguration
-com.toskey.cube.common.security.service.PasswordUserDetailsServiceImpl
-com.toskey.cube.common.security.service.SmsUserDetailsServiceImpl

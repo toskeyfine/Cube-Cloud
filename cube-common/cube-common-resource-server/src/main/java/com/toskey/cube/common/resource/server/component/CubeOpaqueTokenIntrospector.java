@@ -42,9 +42,6 @@ public class CubeOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
             throw new InvalidBearerTokenException(token);
         }
 
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) authorization.getAttributes().get(Principal.class.getName());
-        LoginUser loginUser = (LoginUser) usernamePasswordAuthenticationToken.getPrincipal();
-
         UserDetailsService userDetailsService = null;
         if (authorization.getAuthorizationGrantType().getValue().equals(SecurityConstants.GRANT_TYPE_SMS)) {
             userDetailsService = SpringContextHolder.getBean(SmsUserDetailsServiceImpl.class);
@@ -53,10 +50,9 @@ public class CubeOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
         } else {
             throw new ClassNotFoundException("UserDetailsService not found");
         }
-
-        UserDetails userDetails = userDetailsService.loadUserByUsername(loginUser.getUsername());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(authorization.getPrincipalName());
         if (userDetails == null) {
-            throw new UserPrincipalNotFoundException(loginUser.getUsername());
+            throw new UserPrincipalNotFoundException(authorization.getPrincipalName());
         }
 
         return (LoginUser) userDetails;
