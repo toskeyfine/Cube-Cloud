@@ -54,18 +54,23 @@ public class TokenEndpointAuthenticationFailureHandler implements Authentication
         if (OAuth2ParameterNames.PASSWORD.equals(grantType)) {
             String username = request.getParameter(OAuth2ParameterNames.USERNAME);
 
+            saveLog(username, grantType, exception);
+
             if (exception instanceof OAuth2AuthenticationException) {
                 String cacheKey = buildCacheKey(username);
                 long cacheErrorTimes = redisTemplate.opsForValue().increment(cacheKey);
                 redisTemplate.expire(cacheKey, CacheConstants.EXPIRE_LOGIN_ERRORS, TimeUnit.MILLISECONDS);
                 if (cacheErrorTimes >= SecurityConstants.LOGIN_ERROR_MAX_TIMES) {
                     remoteUserService.lock(username);
+                    response.setStatus(401);
+                    ResponseUtils.writeJson(RestResult.failure("您的账号已被锁定，请20分钟后重试."), response);
+                    return;
                 }
             }
 
-            saveLog(username, grantType, exception);
         }
-        ResponseUtils.writeJson(RestResult.failure(exception.getLocalizedMessage(), null), response);
+        response.setStatus(401);
+        ResponseUtils.writeJson(RestResult.failure(exception.getLocalizedMessage()), response);
     }
 
     private void saveLog(String username, String grantType, AuthenticationException exception) {

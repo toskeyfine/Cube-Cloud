@@ -80,67 +80,73 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
                         smsCodeAuthenticationToken.getMobile(),
                         smsCodeAuthenticationToken.getCode()
                 );
-        Authentication passwordAuthentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
-        // 构建token
-        // @formatter:off
-        DefaultOAuth2TokenContext.Builder tokenContextBuilder = DefaultOAuth2TokenContext.builder()
-                .registeredClient(registeredClient)
-                .principal(passwordAuthentication)
-                .authorizationServerContext(AuthorizationServerContextHolder.getContext())
-                .authorizedScopes(scopeSet)
-                .authorizationGrantType(SMS_CODE_GRANT_TYPE)
-                .authorizationGrant(smsCodeAuthenticationToken);
+        try {
+            Authentication passwordAuthentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+            // 构建token
+            // @formatter:off
+            DefaultOAuth2TokenContext.Builder tokenContextBuilder = DefaultOAuth2TokenContext.builder()
+                    .registeredClient(registeredClient)
+                    .principal(passwordAuthentication)
+                    .authorizationServerContext(AuthorizationServerContextHolder.getContext())
+                    .authorizedScopes(scopeSet)
+                    .authorizationGrantType(SMS_CODE_GRANT_TYPE)
+                    .authorizationGrant(smsCodeAuthenticationToken);
 
-        OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient)
-                .principalName(passwordAuthentication.getName())
-                .authorizationGrantType(SMS_CODE_GRANT_TYPE)
-                .authorizedScopes(scopeSet);
+            OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient)
+                    .principalName(passwordAuthentication.getName())
+                    .authorizationGrantType(SMS_CODE_GRANT_TYPE)
+                    .authorizedScopes(scopeSet);
 
-        OAuth2TokenContext tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.ACCESS_TOKEN).build();
-        OAuth2Token generatedAccessToken = this.tokenGenerator.generate(tokenContext);
-        if (generatedAccessToken == null) {
-            OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
-                    "The token generator failed to generate the access token.", ERROR_URI);
-            throw new OAuth2AuthenticationException(error);
-        }
-        if (this.logger.isTraceEnabled()) {
-            this.logger.trace("Generated access token");
-        }
-
-        OAuth2AccessToken accessToken = OAuth2AuthenticationProviderUtils.accessToken(authorizationBuilder,
-                generatedAccessToken, tokenContext);
-
-        // ----- Refresh token -----
-        OAuth2RefreshToken refreshToken = null;
-        // Do not issue refresh token to public client
-        if (registeredClient.getAuthorizationGrantTypes().contains(AuthorizationGrantType.REFRESH_TOKEN)) {
-            tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.REFRESH_TOKEN).build();
-            OAuth2Token generatedRefreshToken = this.tokenGenerator.generate(tokenContext);
-            if (generatedRefreshToken != null) {
-                if (!(generatedRefreshToken instanceof OAuth2RefreshToken oAuth2RefreshToken)) {
-                    OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
-                            "The token generator failed to generate a valid refresh token.", ERROR_URI);
-                    throw new OAuth2AuthenticationException(error);
-                }
-
-                if (this.logger.isTraceEnabled()) {
-                    this.logger.trace("Generated refresh token");
-                }
-
-                refreshToken = oAuth2RefreshToken;
-                authorizationBuilder.refreshToken(refreshToken);
+            OAuth2TokenContext tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.ACCESS_TOKEN).build();
+            OAuth2Token generatedAccessToken = this.tokenGenerator.generate(tokenContext);
+            if (generatedAccessToken == null) {
+                OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
+                        "The token generator failed to generate the access token.", ERROR_URI);
+                throw new OAuth2AuthenticationException(error);
             }
-        }
+            if (this.logger.isTraceEnabled()) {
+                this.logger.trace("Generated access token");
+            }
 
-        OAuth2Authorization authorization = authorizationBuilder.build();
-        authorizationService.save(authorization);
-        return new OAuth2AccessTokenAuthenticationToken(registeredClient, clientPrincipal, accessToken, refreshToken, Objects.requireNonNull(authorization.getAccessToken().getClaims()));
+            OAuth2AccessToken accessToken = OAuth2AuthenticationProviderUtils.accessToken(authorizationBuilder,
+                    generatedAccessToken, tokenContext);
+
+            // ----- Refresh token -----
+            OAuth2RefreshToken refreshToken = null;
+            // Do not issue refresh token to public client
+            if (registeredClient.getAuthorizationGrantTypes().contains(AuthorizationGrantType.REFRESH_TOKEN)) {
+                tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.REFRESH_TOKEN).build();
+                OAuth2Token generatedRefreshToken = this.tokenGenerator.generate(tokenContext);
+                if (generatedRefreshToken != null) {
+                    if (!(generatedRefreshToken instanceof OAuth2RefreshToken oAuth2RefreshToken)) {
+                        OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
+                                "The token generator failed to generate a valid refresh token.", ERROR_URI);
+                        throw new OAuth2AuthenticationException(error);
+                    }
+
+                    if (this.logger.isTraceEnabled()) {
+                        this.logger.trace("Generated refresh token");
+                    }
+
+                    refreshToken = oAuth2RefreshToken;
+                    authorizationBuilder.refreshToken(refreshToken);
+                }
+            }
+
+            OAuth2Authorization authorization = authorizationBuilder.build();
+            authorizationService.save(authorization);
+            return new OAuth2AccessTokenAuthenticationToken(registeredClient, clientPrincipal, accessToken, refreshToken, Objects.requireNonNull(authorization.getAccessToken().getClaims()));
+        } catch (Exception ex) {
+            throw new OAuth2AuthenticationException(new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR),
+                    ex.getLocalizedMessage(), ex);
+        }
     }
+
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return PasswordAuthenticationToken.class.isAssignableFrom(authentication);
+        return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);
     }
 
     /**
