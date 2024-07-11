@@ -16,4 +16,22 @@
         delete from rel_role_menu where role_id = #{roleId}
     </delete>
 
+    <select id="selectListByUserId" resultType="com.toskey.cube.service.sas.business.domain.entity.SysRole">
+        select
+            r.id,
+            r.name,
+            r.code,
+            r.user_limit,
+            r.ordered,
+            r.status,
+            r.data_scope_type
+        from sys_role r
+        left join rel_user_role rur on rur.role_id = r.id
+        where rur.user_id = #{userId}
+    </select>
+
+    <select id="selectBindDeptIds" resultType="java.lang.String">
+        select dept_id from rel_role_dept where role_id = #{roleId}
+    </select>
+
 </mapper>

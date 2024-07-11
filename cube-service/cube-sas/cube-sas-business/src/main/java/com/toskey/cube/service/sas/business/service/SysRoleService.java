@@ -17,14 +17,17 @@ import com.toskey.cube.service.sas.business.vo.role.PermissionBindVO;
 import com.toskey.cube.service.sas.business.vo.role.RoleFormVO;
 import com.toskey.cube.service.sas.business.vo.role.RoleQueryResultVO;
 import com.toskey.cube.service.sas.business.vo.role.RoleQueryVO;
+import com.toskey.cube.service.sas.interfaces.dto.RoleDTO;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.management.relation.Role;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -52,6 +55,21 @@ public class SysRoleService extends ServiceImpl<SysRoleMapper, SysRole> implemen
     public RoleQueryResultVO findById(String id) {
         SysRole role = getById(id);
         return role.toMapper(RoleQueryResultVO.class);
+    }
+
+    public List<RoleDTO> findListByUserId(String userId) {
+        List<SysRole> roleList = baseMapper.selectListByUserId(userId);
+        if (CollectionUtils.isNotEmpty(roleList)) {
+            List<RoleDTO> roleDTOs = EntityUtils.toMapper(roleList, RoleDTO.class);
+            roleDTOs.stream()
+                    .filter(r -> DataScopeType.of(r.getDataScopeType()) == DataScopeType.SELECTED_DEPT)
+                    .forEach(r -> {
+                        List<String> bindDeptIds = baseMapper.selectBindDeptIds(r.getId());
+                        r.setDataScopeDeptIds(bindDeptIds.toArray(new String[0]));
+                    });
+            return roleDTOs;
+        }
+        return null;
     }
 
     public boolean saveRole(SysRole role) {

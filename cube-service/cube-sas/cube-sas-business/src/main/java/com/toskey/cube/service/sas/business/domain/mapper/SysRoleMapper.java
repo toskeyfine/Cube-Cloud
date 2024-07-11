@@ -20,4 +20,8 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
 
     int insertRoleMenuRel(@Param("roleId") String roleId, @Param("menuIds") List<String> menuIds);
 
+    List<SysRole> selectListByUserId(@Param("userId") String userId);
+
+    List<String> selectBindDeptIds(@Param("roleId") String roleId);
+
 }
