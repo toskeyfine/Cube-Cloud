@@ -9,6 +9,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 /**
  * RemoteUserService
@@ -30,7 +31,7 @@ public interface RemoteUserService {
     @GetMapping("/user/mobile/{mobile}")
     RestResult<UserDTO> loadUserByMobile(@PathVariable("mobile") String mobile);
 
-    @PostMapping("/user/{username}/locked")
+    @PutMapping("/user/{username}/locked")
     RestResult<Boolean> lock(@PathVariable("username") String username);
 
 }

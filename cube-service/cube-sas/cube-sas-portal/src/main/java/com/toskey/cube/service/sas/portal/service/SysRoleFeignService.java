@@ -1,6 +1,7 @@
 package com.toskey.cube.service.sas.portal.service;
 
 import com.toskey.cube.common.core.base.RestResult;
+import com.toskey.cube.common.resource.server.annotation.AuthIgnore;
 import com.toskey.cube.service.sas.business.service.SysRoleService;
 import com.toskey.cube.service.sas.interfaces.dto.RoleDTO;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class SysRoleFeignService {
         this.roleService = roleService;
     }
 
+    @AuthIgnore
     @GetMapping("/{userId}/list")
     public RestResult<List<RoleDTO>> listByUserId(@PathVariable("userId") String userId) {
         List<RoleDTO> result = roleService.findListByUserId(userId);
