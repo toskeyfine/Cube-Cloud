@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CJob {
+public @interface SyncJob {
 
     String id() default "";
 

@@ -29,13 +29,13 @@ public class QuartzUtils {
     public List<QuartzJobBean> getAllLocalJobs() {
         Map<String, QuartzJobBean> beanMap = SpringContextHolder.getBeansOfType(QuartzJobBean.class);
         return beanMap.values().stream()
-                .filter(bean -> AnnotationUtils.findAnnotation(bean.getClass(), CJob.class) != null)
+                .filter(bean -> AnnotationUtils.findAnnotation(bean.getClass(), SyncJob.class) != null)
                 .collect(Collectors.toList());
     }
 
     public void createJob(Scheduler scheduler, QuartzJobBean quartzJobBean) throws SchedulerException {
-        CJob cJob = AnnotationUtils.getAnnotation(quartzJobBean.getClass(), CJob.class);
-        String id = cJob.id();
+        SyncJob syncJob = AnnotationUtils.getAnnotation(quartzJobBean.getClass(), SyncJob.class);
+        String id = syncJob.id();
         if (StringUtils.isBlank(id)) {
             JobId jobId = AnnotationUtils.getAnnotation(quartzJobBean.getClass(), JobId.class);
             if (jobId == null) {
@@ -43,7 +43,7 @@ public class QuartzUtils {
             }
             id = jobId.value();
         }
-        String group = cJob.group();
+        String group = syncJob.group();
         if (StringUtils.isBlank(group)) {
             JobGroup jobGroup = AnnotationUtils.getAnnotation(quartzJobBean.getClass(), JobGroup.class);
             if (jobGroup == null) {
@@ -51,14 +51,14 @@ public class QuartzUtils {
             }
             group = jobGroup.value();
         }
-        int priority = cJob.priority();
+        int priority = syncJob.priority();
         if (priority < 0) {
             JobPriority jobPriority = AnnotationUtils.getAnnotation(quartzJobBean.getClass(), JobPriority.class);
             if (jobPriority != null) {
                 priority = jobPriority.value();
             }
         }
-        String cron = cJob.cron();
+        String cron = syncJob.cron();
         if (StringUtils.isBlank(cron)) {
             JobCron jobCron = AnnotationUtils.getAnnotation(quartzJobBean.getClass(), JobCron.class);
             if (jobCron == null) {
@@ -67,7 +67,7 @@ public class QuartzUtils {
             cron = jobCron.value();
         }
         AsyncJob asyncJob = AnnotationUtils.getAnnotation(quartzJobBean.getClass(), AsyncJob.class);
-        boolean async = asyncJob != null ? cJob.async() && asyncJob.value() : cJob.async();
+        boolean async = asyncJob != null ? syncJob.async() && asyncJob.value() : syncJob.async();
 
         Class<? extends Job> job = async ? AsyncQuartzJobExecutor.class : QuartzJobExecutor.class;
 
@@ -76,7 +76,7 @@ public class QuartzUtils {
                 .build();
         CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cron);
         // 设置执行错误时的处理策略
-        switch (cJob.misfireStrategy()) {
+        switch (syncJob.misfireStrategy()) {
             case IGNORE_MISFIRES -> cronScheduleBuilder.withMisfireHandlingInstructionIgnoreMisfires();
             case FIRE_AND_PROCEED -> cronScheduleBuilder.withMisfireHandlingInstructionFireAndProceed();
             case DO_NOTHING -> cronScheduleBuilder.withMisfireHandlingInstructionDoNothing();
