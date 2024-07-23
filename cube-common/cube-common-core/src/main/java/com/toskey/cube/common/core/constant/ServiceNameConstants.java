@@ -28,4 +28,6 @@ public interface ServiceNameConstants {
      */
     String SERVICE_CONFIG = "cube-cloud-config";
 
+    String SERVICE_SEQUENCE = "cube-cloud-sequence";
+
 }

@@ -34,6 +34,10 @@ public class EntityUtils {
         return entity.toMapper(mapperCls);
     }
 
+    public static <E extends BaseEntity, M extends BaseEntityMapper> M toMapper(@Nonnull Object entity, @Nonnull final Class<M> mapperCls) {
+        return ((E) entity).toMapper(mapperCls);
+    }
+
     public static <E extends BaseEntity, M extends BaseEntityMapper> List<M> toMapper(@Nonnull List<E> entities, @Nonnull final Class<M> mapperCls) {
         return entities.stream()
                 .map(t -> EntityUtils.toMapper(t, mapperCls))
@@ -47,6 +51,16 @@ public class EntityUtils {
     public static <M extends BaseEntityMapper> List<? extends BaseEntity> toEntity(@Nonnull List<M> mappers) {
         return mappers.stream()
                 .map(EntityUtils::toEntity)
+                .toList();
+    }
+
+    public static <M extends BaseEntityMapper> BaseEntity toEntity(@Nonnull Object mapper, Class<? extends BaseEntity> entityCls) {
+        return ((M) mapper).toEntity(entityCls);
+    }
+
+    public static <M extends BaseEntityMapper> List<? extends BaseEntity> toEntity(@Nonnull List<M> mappers, Class<? extends BaseEntity> entityCls) {
+        return mappers.stream()
+                .map(mapper -> EntityUtils.toEntity(mapper, entityCls))
                 .toList();
     }
 

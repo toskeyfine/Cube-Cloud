@@ -1,9 +1,10 @@
 package com.toskey.cube.common.core.base;
 
 import com.toskey.cube.common.core.annotation.EntityMapper;
-import com.toskey.cube.common.core.annotation.EntityProperty;
 import com.toskey.cube.common.core.annotation.IgnoreProperty;
+import com.toskey.cube.common.core.annotation.MapperProperty;
 import com.toskey.cube.common.core.constant.CommonConstants;
+import com.toskey.cube.common.core.util.EntityUtils;
 import com.toskey.cube.common.core.util.StringUtils;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeanUtils;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * BaseEntityMapper
@@ -58,15 +60,34 @@ public class BaseEntityMapper implements Serializable {
         BeanUtils.copyProperties(this, entity, ignoreFileNames);
 
         Field[] entityProperties = Arrays.stream(this.getClass().getDeclaredFields())
-                .filter(field -> field.isAnnotationPresent(EntityProperty.class)
+                .filter(field -> field.isAnnotationPresent(MapperProperty.class)
                         && !field.isAnnotationPresent(IgnoreProperty.class))
                 .toArray(Field[]::new);
         for (Field field : entityProperties) {
-            EntityProperty entityProperty = field.getAnnotation(EntityProperty.class);
-            String targetProperty = entityProperty.target();
+            MapperProperty mapperProperty = field.getAnnotation(MapperProperty.class);
+            String targetName = mapperProperty.targetName();
+            if (StringUtils.isBlank(targetName)) {
+                targetName = field.getName();
+            }
+            Class<? extends BaseEntity> targetClass = mapperProperty.target();
             Method mapperGetter = this.getClass().getDeclaredMethod(CommonConstants.GETTER_PREFIX + StringUtils.toUpperCase(field.getName(), 0));
-            Method entitySetter = entityCls.getDeclaredMethod(CommonConstants.SETTER_PREFIX + StringUtils.toUpperCase(targetProperty, 0), field.getType());
-            entitySetter.invoke(entity, mapperGetter.invoke(this));
+
+            String entitySetterName = CommonConstants.SETTER_PREFIX + StringUtils.toUpperCase(targetName, 0);
+            if (targetClass != null && targetClass != BaseEntity.class) {
+                if (field.getType() == List.class) {
+                    List<? extends BaseEntityMapper> fieldValue = (List<? extends BaseEntityMapper>) mapperGetter.invoke(this);
+                    List<? extends BaseEntity> entityValue = EntityUtils.toEntity(fieldValue, targetClass);
+                    Method entitySetter = entityCls.getDeclaredMethod(entitySetterName, field.getType());
+                    entitySetter.invoke(entity, entityValue);
+                } else {
+                    Object fieldValue = mapperGetter.invoke(this);
+                    Method entitySetter = entityCls.getDeclaredMethod(entitySetterName, targetClass);
+                    entitySetter.invoke(entity, EntityUtils.toEntity(fieldValue, targetClass));
+                }
+            } else {
+                Method entitySetter = entityCls.getDeclaredMethod(entitySetterName, field.getType());
+                entitySetter.invoke(entity, mapperGetter.invoke(this));
+            }
         }
         return entity;
     }
