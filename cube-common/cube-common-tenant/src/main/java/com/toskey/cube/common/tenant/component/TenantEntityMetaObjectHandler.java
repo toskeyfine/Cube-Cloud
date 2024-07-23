@@ -8,10 +8,8 @@ import org.springframework.util.ClassUtils;
 /**
  * TenantEntityMetaObjectHandler
  *
- * @author lis
- * @version 1.0
- * @description TODO
- * @date 2024/7/22 16:03
+ * @author toskey
+ * @version 1.0.0
  */
 public class TenantEntityMetaObjectHandler implements MetaObjectHandler {
 
