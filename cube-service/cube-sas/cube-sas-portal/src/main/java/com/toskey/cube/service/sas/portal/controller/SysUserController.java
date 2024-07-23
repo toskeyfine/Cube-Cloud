@@ -33,7 +33,6 @@ public class SysUserController {
         return RestResult.success(userService.findPage(query));
     }
 
-    @AuthIgnore
     @RequestLog(value = "查询详情", content = "查询ID为#｛id｝的用户详情")
     @GetMapping("/{id}")
     public RestResult<UserQueryResultVO> info(@PathVariable("id") String id) {
@@ -42,7 +41,7 @@ public class SysUserController {
 
     @RequestLog("新增用户")
     @PostMapping
-    public RestResult<Boolean> save(@Validated @RequestBody UserFormVO form) {
+    public RestResult<Boolean> save(@RequestBody UserFormVO form) {
         return RestResult.success(userService.saveUser(form));
     }
 
