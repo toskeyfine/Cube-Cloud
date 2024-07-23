@@ -1,40 +1,28 @@
-package com.toskey.cube.common.data.component;
+package com.toskey.cube.common.tenant.component;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.toskey.cube.common.security.util.SecurityUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.util.ClassUtils;
 
-import java.time.LocalDateTime;
-
 /**
- * MybatisPlusMetaObjectHandler
+ * TenantEntityMetaObjectHandler
  *
- * @author toskey
- * @version 1.0.0
+ * @author lis
+ * @version 1.0
+ * @description TODO
+ * @date 2024/7/22 16:03
  */
-public class MybatisPlusMetaObjectHandler implements MetaObjectHandler {
+public class TenantEntityMetaObjectHandler implements MetaObjectHandler {
+
     @Override
     public void insertFill(MetaObject metaObject) {
-        LocalDateTime now = LocalDateTime.now();
-
-        // 审计字段自动填充
-        fillValIfNullByName("createTime", now, metaObject, false);
-        fillValIfNullByName("createBy", getUserId(), metaObject, false);
-
-        fillValIfNullByName("updateTime", LocalDateTime.now(), metaObject, true);
-        fillValIfNullByName("updateBy", getUserId(), metaObject, true);
-
-        // 删除标记自动填充
-        fillValIfNullByName("delFlag", 0, metaObject, false);
-
+        fillValIfNullByName("tenantId", TenantContextHolder.getContext().getId(), metaObject, true);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        fillValIfNullByName("updateTime", LocalDateTime.now(), metaObject, true);
-        fillValIfNullByName("updateBy", getUserId(), metaObject, true);
+        fillValIfNullByName("tenantId", TenantContextHolder.getContext().getId(), metaObject, true);
     }
 
     private static void fillValIfNullByName(String fieldName, Object fieldVal, MetaObject metaObject, boolean isCover) {
@@ -57,19 +45,5 @@ public class MybatisPlusMetaObjectHandler implements MetaObjectHandler {
         if (ClassUtils.isAssignableValue(getterType, fieldVal)) {
             metaObject.setValue(fieldName, fieldVal);
         }
-    }
-
-    /**
-     * 获取当前用户id
-     *
-     * @return
-     */
-    private String getUserId() {
-        try {
-            SecurityUtils.getUserId();
-        } catch (Exception e) {
-            return null;
-        }
-        return SecurityUtils.getUserId();
     }
 }

@@ -1,1 +1,2 @@
+com.toskey.cube.common.tenant.component.TenantEntityMetaObjectHandler
 com.toskey.cube.common.tenant.TenantAutoConfiguration

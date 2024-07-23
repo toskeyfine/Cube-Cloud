@@ -4,9 +4,13 @@ import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import com.toskey.cube.common.data.component.MybatisPlusMetaObjectHandler;
+import com.toskey.cube.common.data.component.DataEntityMetaObjectHandler;
+import com.toskey.cube.common.data.component.PrimaryMetaObjectHandler;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+
+import java.util.List;
 
 /**
  * MybatisPlusConfiguration
@@ -25,9 +29,10 @@ public class MybatisPlusConfiguration {
         return interceptor;
     }
 
+    @Primary
     @Bean
-    @ConditionalOnMissingBean
-    public MetaObjectHandler metaObjectHandler() {
-        return new MybatisPlusMetaObjectHandler();
+    public PrimaryMetaObjectHandler primaryMetaObjectHandler(List<MetaObjectHandler> handlers) {
+        return new PrimaryMetaObjectHandler(handlers);
     }
+
 }

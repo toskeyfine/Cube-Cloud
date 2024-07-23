@@ -16,7 +16,7 @@ public class TenantContextInterceptor implements RequestInterceptor {
     public void apply(RequestTemplate requestTemplate) {
         Optional.of(TenantContextHolder.getContext())
                 .ifPresent(context ->
-                        requestTemplate.header("TENANT-ID", context.getId())
+                        requestTemplate.header("X-TENANT-ID", context.getId())
                 );
     }
 }

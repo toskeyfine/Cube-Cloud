@@ -1,1 +1,2 @@
+com.toskey.cube.common.data.component.DataEntityMetaObjectHandler
 com.toskey.cube.common.data.config.MybatisPlusConfiguration
