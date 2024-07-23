@@ -125,7 +125,11 @@
                 <artifactId>cube-config-interface</artifactId>
                 <version>${cube-cloud.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.toskey</groupId>
+                <artifactId>cube-sequence-interface</artifactId>
+                <version>${cube-cloud.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-extension</artifactId>

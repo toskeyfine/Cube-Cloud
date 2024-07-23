@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.toskey.cube.service.sequence.business.domain.mapper.SequenceSectionMapper">
+
+    <select id="selectByRuleId" resultType="com.toskey.cube.service.sequence.business.domain.entity.SequenceSection">
+        select
+            id, rule_id, begin, finish, step
+        from sequence_section
+        where rule_id = #{ruleId}
+    </select>
+
+</mapper>

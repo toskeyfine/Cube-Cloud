@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.toskey.cube.service.sequence.business.domain.mapper.SequenceRuleMapper">
+
+    <resultMap id="BaseResultMap" type="com.toskey.cube.service.sequence.business.domain.entity.SequenceRule">
+        <id property="id" column="rule_id" />
+        <result property="type" column="type" />
+        <result property="content" column="content" />
+        <result property="format" column="format" />
+        <result property="totalLength" column="total_length" />
+        <result property="ordered" column="rule_ordered" />
+        <result property="sequenceId" column="sequence_id" />
+        <association property="sequenceSection" javaType="com.toskey.cube.service.sequence.business.domain.entity.SequenceSection">
+            <id property="id" column="rule_id" />
+            <result property="ruleId" column="rule_id" />
+            <result property="begin" column="begin" />
+            <result property="finish" column="finish" />
+            <result property="step" column="step" />
+        </association>
+    </resultMap>
+
+</mapper>

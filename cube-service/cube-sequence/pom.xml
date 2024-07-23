@@ -5,22 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.toskey</groupId>
-        <artifactId>cube-cloud</artifactId>
+        <artifactId>cube-service</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>cube-service</artifactId>
+    <artifactId>cube-sequence</artifactId>
     <packaging>pom</packaging>
 
-    <name>cube-service</name>
+    <name>cube-sequence</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
-
     <modules>
-        <module>cube-sas</module>
-        <module>cube-config</module>
-        <module>cube-log</module>
-        <module>cube-sequence</module>
+        <module>cube-sequence-business</module>
+        <module>cube-sequence-interface</module>
+        <module>cube-sequence-portal</module>
     </modules>
 
 </project>
