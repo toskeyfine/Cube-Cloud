@@ -7,6 +7,7 @@ import com.toskey.cube.cloud.authentication.sms.SmsCodeAuthenticationConverter;
 import com.toskey.cube.cloud.authentication.sms.SmsCodeAuthenticationProvider;
 import com.toskey.cube.cloud.handler.*;
 import com.toskey.cube.cloud.token.AccessTokenGenerator;
+import com.toskey.cube.cloud.token.RefreshTokenGenerator;
 import com.toskey.cube.cloud.token.TokenCustomizer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -28,10 +29,7 @@ import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
-import org.springframework.security.oauth2.server.authorization.token.DelegatingOAuth2TokenGenerator;
-import org.springframework.security.oauth2.server.authorization.token.OAuth2AccessTokenGenerator;
-import org.springframework.security.oauth2.server.authorization.token.OAuth2RefreshTokenGenerator;
-import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
+import org.springframework.security.oauth2.server.authorization.token.*;
 import org.springframework.security.oauth2.server.authorization.web.authentication.DelegatingAuthenticationConverter;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
@@ -142,21 +140,7 @@ public class AuthorizationServerConfiguration {
     public OAuth2TokenGenerator<OAuth2Token> accessTokenGenerator() {
         AccessTokenGenerator generator = new AccessTokenGenerator();
         generator.setAccessTokenCustomizer(new TokenCustomizer());
-        return new DelegatingOAuth2TokenGenerator(generator, new OAuth2RefreshTokenGenerator());
-    }
-
-    @Bean
-    public CorsFilter corsFilter(AuthorizationServerProperties authorizationServerProperties) {
-        CorsConfiguration configuration = new CorsConfiguration();
-        authorizationServerProperties.getCorsUrls().forEach(configuration::addAllowedOrigin);
-        configuration.setAllowCredentials(true);
-        configuration.addAllowedMethod("*");
-        configuration.addAllowedHeader("*");
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-
-        return new CorsFilter(source);
+        return new DelegatingOAuth2TokenGenerator(generator, new RefreshTokenGenerator());
     }
 
     @Bean

@@ -46,8 +46,6 @@ public class PasswordAuthenticationProvider implements AuthenticationProvider {
 
     private final AuthenticationManager authenticationManager;
 
-    public MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
-
     public PasswordAuthenticationProvider(OAuth2AuthorizationService authorizationService,
                                           OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator,
                                           AuthenticationManager authenticationManager) {
