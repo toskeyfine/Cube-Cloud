@@ -40,27 +40,21 @@ public class AuthIgnoreProperties implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        // 处理FeignApi类注解
-        ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
-        provider.addIncludeFilter(new AnnotationTypeFilter(AuthIgnore.class));
-        provider.setResourceLoader(null);
-        provider.setResourcePattern("**/*.class");
-
-        Set<BeanDefinition> components = provider.findCandidateComponents("com.toskey.cube");
-        for (BeanDefinition bean : components) {
-            Class<?> clazz = Class.forName(bean.getBeanClassName());
-            RequestMapping requestMapping = AnnotationUtils.findAnnotation(clazz, RequestMapping.class);
-            if (requestMapping != null) {
-                String[] paths = requestMapping.value();
-                Arrays.stream(paths).forEach(path -> urls.add(handlePathPattern(path) + "/**"));
-            }
-        }
         // 处理FeignApi方法注解
         RequestMappingHandlerMapping handlerMapping = SpringContextHolder.getBean("requestMappingHandlerMapping");
         Map<RequestMappingInfo, HandlerMethod> handlerMethodMap = handlerMapping.getHandlerMethods();
         handlerMethodMap.forEach((k, v) -> {
             AuthIgnore methodAnno = AnnotationUtils.findAnnotation(v.getMethod(), AuthIgnore.class);
             if (methodAnno != null) {
+                PathPatternsRequestCondition condition = k.getPathPatternsCondition();
+                if (condition != null) {
+                    condition.getPatternValues().forEach(url -> {
+                        urls.add(handlePathPattern(url));
+                    });
+                }
+            }
+            AuthIgnore clazzAnno = AnnotationUtils.findAnnotation(v.getBeanType(), AuthIgnore.class);
+            if (clazzAnno != null) {
                 PathPatternsRequestCondition condition = k.getPathPatternsCondition();
                 if (condition != null) {
                     condition.getPatternValues().forEach(url -> {
@@ -78,19 +72,9 @@ public class AuthIgnoreProperties implements InitializingBean {
         final Matcher matcher = URL_PATTERN.matcher(path);
         boolean result = matcher.find();
         if (result) {
-            final Set<String> varNums = new TreeSet<>();
-            final Matcher matcher1 = VAR_PATTERN.matcher("*");
-            while (matcher1.find()) {
-                varNums.add(matcher1.group(1));
-            }
             final StringBuilder sb = new StringBuilder();
             do {
-                String replacement = "*";
-                for (final String var : varNums) {
-                    final int group = Integer.parseInt(var);
-                    replacement = replacement.replace("$" + var, matcher.group(group));
-                }
-                matcher.appendReplacement(sb, StringUtils.escape(replacement));
+                matcher.appendReplacement(sb, "*");
                 result = matcher.find();
             } while (result);
             matcher.appendTail(sb);

@@ -3,6 +3,7 @@ package com.toskey.cube.service.config.business.vo.group;
 import com.toskey.cube.common.core.annotation.EntityMapper;
 import com.toskey.cube.common.core.base.BaseEntityMapper;
 import com.toskey.cube.service.config.business.domain.entity.SysConfigGroup;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -27,6 +28,7 @@ public class ConfigGroupFormVO extends BaseEntityMapper {
 
     private String status;
 
+    @Min(0)
     private Integer ordered;
 
     public String getId() {

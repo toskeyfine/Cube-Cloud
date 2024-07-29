@@ -7,6 +7,7 @@ import com.toskey.cube.common.tenant.annotation.TenantScope;
 import lombok.SneakyThrows;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.HexValue;
+import net.sf.jsqlparser.expression.StringValue;
 import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
 import net.sf.jsqlparser.expression.operators.relational.EqualsTo;
 import net.sf.jsqlparser.schema.Column;
@@ -87,15 +88,13 @@ public class TenantMybatisInterceptor extends JsqlParserSupport implements Inner
                 }
                 TenantContext tenantContext = TenantContextHolder.getContext();
                 // 增加租户ID检查，避免SQL注入
-//                RestResult<Boolean> checkedResult = remoteTenantService.checkTenantId(tenantContext.getId());
-//                if (!checkedResult.getData()) {
-//                     检查不过的租户ID将不返回任何数据
-//                    return new HexValue(" 1 = 2 ");
-//                }
+                if (tenantContext == null || StringUtils.isBlank(tenantContext.getId())) {
+                    return new HexValue(" 1 = 2 ");
+                }
 
                 EqualsTo equals = new EqualsTo();
                 equals.setLeftExpression(new Column(mainTableName + "." + FIELD_TENANT));
-//                equals.setRightExpression(new StringValue(currentTenantId));
+                equals.setRightExpression(new StringValue(tenantContext.getId()));
                 return new AndExpression(where, equals);
             }
         }

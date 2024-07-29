@@ -19,6 +19,7 @@ import java.util.UUID;
 
 /**
  * AccessToken Generator
+ * <br>
  * 重写OAuth2TokenGenerator, 将accessToken改为UUID
  *
  * @author toskey

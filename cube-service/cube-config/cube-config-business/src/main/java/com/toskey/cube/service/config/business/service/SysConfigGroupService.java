@@ -63,7 +63,7 @@ public class SysConfigGroupService extends ServiceImpl<SysConfigGroupMapper, Sys
      */
     public boolean saveConfigGroup(ConfigGroupFormVO form) {
         SysConfigGroup group = form.toEntity();
-        return save(group);
+        return saveConfigGroup(group);
     }
 
     public boolean updateConfigGroup(SysConfigGroup group) {

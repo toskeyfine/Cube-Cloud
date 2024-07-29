@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.toskey.cube.common.core.base.PageData;
+import com.toskey.cube.common.core.constant.CacheConstants;
 import com.toskey.cube.common.core.constant.CommonConstants;
 import com.toskey.cube.common.core.constant.enums.PasswordStrength;
 import com.toskey.cube.common.core.exception.BusinessException;
@@ -13,6 +14,7 @@ import com.toskey.cube.common.core.util.PageUtils;
 import com.toskey.cube.common.core.util.StringUtils;
 import com.toskey.cube.common.core.util.PasswordUtils;
 import com.toskey.cube.common.security.util.SecurityUtils;
+import com.toskey.cube.common.tenant.component.TenantContextHolder;
 import com.toskey.cube.service.sas.interfaces.dto.UserDTO;
 import com.toskey.cube.service.sas.business.domain.entity.SysRole;
 import com.toskey.cube.service.sas.business.domain.entity.SysUser;
@@ -23,7 +25,9 @@ import com.toskey.cube.service.sas.business.vo.user.UserQueryVO;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +42,10 @@ import java.util.List;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implements IService<SysUser> {
+
+    private final RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 分页查询
@@ -157,6 +164,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
     }
 
     public boolean lock(@NotBlank String username) {
+        redisTemplate.delete(String.format("%s:login_user:%s", CacheConstants.CACHE_GLOBAL_PREFIX, username));
         return update(
                 Wrappers.<SysUser>lambdaUpdate()
                         .eq(SysUser::getUsername, username)
@@ -165,6 +173,10 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
     }
 
     public boolean unlock(@NotBlank String username) {
+        redisTemplate.delete(String.format("%s:%s:%s:%s", CacheConstants.CACHE_GLOBAL_PREFIX,
+                TenantContextHolder.getContext().getId(),
+                CacheConstants.CACHE_LOGIN_ERRORS, username));
+        redisTemplate.delete(String.format("%s:login_user:%s", CacheConstants.CACHE_GLOBAL_PREFIX, username));
         return update(
                 Wrappers.<SysUser>lambdaUpdate()
                         .eq(SysUser::getUsername, username)

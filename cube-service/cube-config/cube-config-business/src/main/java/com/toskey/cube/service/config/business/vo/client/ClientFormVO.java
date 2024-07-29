@@ -3,6 +3,10 @@ package com.toskey.cube.service.config.business.vo.client;
 import com.toskey.cube.common.core.annotation.EntityMapper;
 import com.toskey.cube.common.core.base.BaseEntityMapper;
 import com.toskey.cube.service.config.business.domain.entity.OAuth2Client;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * OAuth2ClientFormVO
@@ -15,17 +19,16 @@ public class ClientFormVO extends BaseEntityMapper {
 
     private String id;
 
+    @NotBlank
+    @Size(min = 2, max = 20)
     private String clientName;
 
     /**
      * 客户端id
      */
+    @NotBlank
+    @Size(min = 10, max = 64)
     private String clientId;
-
-    /**
-     * 客户端密钥
-     */
-    private String clientSecret;
 
     /**
      * 资源ids
@@ -35,11 +38,13 @@ public class ClientFormVO extends BaseEntityMapper {
     /**
      * 授权范围
      */
+    @NotBlank
     private String scopes;
 
     /**
      * 认证类型
      */
+    @NotBlank
     private String authorizedGrantTypes;
 
     /**
@@ -89,14 +94,6 @@ public class ClientFormVO extends BaseEntityMapper {
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
-    }
-
-    public String getClientSecret() {
-        return clientSecret;
-    }
-
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
     }
 
     public String getResourceIds() {

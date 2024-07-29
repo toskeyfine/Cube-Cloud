@@ -78,7 +78,7 @@ public class OAuth2ClientService extends ServiceImpl<OAuth2ClientMapper, OAuth2C
         String sk = String.format("sk-%s", UUID.randomUUID().toString().replace("-", ""));
         client.setClientSecret(sk);
         // 校验参数格式
-        return save(client);
+        return saveClient(client);
     }
 
     public boolean updateClient(OAuth2Client client) {

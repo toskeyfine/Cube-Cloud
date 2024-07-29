@@ -11,7 +11,6 @@ import java.util.Objects;
  */
 public class CubeLock implements AutoCloseable {
 
-
     private final Object lock;
 
     private final IDistributedLock distributedLock;

@@ -20,8 +20,6 @@ public class AuthorizationServerProperties {
 
     private String issuerUrl;
 
-    private List<String> corsUrls = new ArrayList<>();
-
     public String[] getIgnorePaths() {
         return ignorePaths;
     }
@@ -46,11 +44,4 @@ public class AuthorizationServerProperties {
         this.issuerUrl = issuerUrl;
     }
 
-    public List<String> getCorsUrls() {
-        return corsUrls;
-    }
-
-    public void setCorsUrls(List<String> corsUrls) {
-        this.corsUrls = corsUrls;
-    }
 }

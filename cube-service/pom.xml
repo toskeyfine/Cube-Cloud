@@ -20,6 +20,7 @@
         <module>cube-sas</module>
         <module>cube-config</module>
         <module>cube-log</module>
+        <module>cube-sequence</module>
     </modules>
 
 </project>

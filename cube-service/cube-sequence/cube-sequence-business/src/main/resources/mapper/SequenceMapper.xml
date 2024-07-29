@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.toskey.cube.service.sequence.business.domain.mapper.SequenceMapper">
+
+    <resultMap id="BaseResultMap" type="com.toskey.cube.service.sequence.business.domain.entity.Sequence">
+        <id column="id" property="id" />
+        <result property="name" column="name" />
+        <result property="code" column="code" />
+        <result property="ruleType" column="rule_type" />
+        <result property="totalLength" column="total_length" />
+        <result property="incrementStepLength" column="increment_step_length" />
+        <result property="padding" column="padding" />
+        <result property="paddingStr" column="padding_str" />
+        <result property="ordered" column="ordered" />
+        <result property="status" column="status" />
+        <collection property="ruleList" ofType="com.toskey.cube.service.sequence.business.domain.entity.SequenceRule">
+            <id property="id" column="rule_id" />
+            <result property="type" column="type" />
+            <result property="content" column="content" />
+            <result property="format" column="format" />
+            <result property="totalLength" column="rule_total_length" />
+            <result property="ordered" column="rule_ordered" />
+            <result property="sequenceId" column="sequence_id" />
+        </collection>
+    </resultMap>
+
+    <insert id="insertDbSequence">
+        CREATE SEQUENCE IF NOT EXISTS ${key}
+        START WITH ${begin}
+        INCREMENT BY ${incrementStepLength}
+        MINVALUE ${min}
+        <choose>
+            <when test="max == null">
+                NO MAXVALUE
+            </when>
+            <otherwise>
+                MAXVALUE ${max}
+            </otherwise>
+        </choose>
+        <if test="cycle">
+            CYCLE
+        </if>
+        CACHE 1;
+    </insert>
+
+    <update id="restartSequence">
+        alter sequence ${key} restart with ${value}
+    </update>
+
+    <delete id="dropDbSequence">
+        DROP SEQUENCE IF EXISTS ${key} CASCADE;
+    </delete>
+
+    <select id="selectSequenceById" resultMap="BaseResultMap">
+        select
+            s.id,
+            s.name,
+            s.code,
+            s.rule_type,
+            s.total_length,
+            s.increment_step_length,
+            s.padding,
+            s.padding_str,
+            s.ordered,
+            s.status,
+            r.id as rule_id,
+            r.code_type,
+            r.content,
+            r.format,
+            r.total_length as rule_total_length,
+            r.ordered as rule_ordered,
+            r.sequence_id
+        from sequence_info s
+        left join sequence_rule r on r.sequence_id = s.id
+        where s.id = #{id}
+        order by r.ordered asc
+    </select>
+
+</mapper>

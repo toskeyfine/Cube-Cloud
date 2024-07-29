@@ -1,14 +1,13 @@
 package com.toskey.cube.cloud.authentication.password;
 
 import com.toskey.cube.cloud.util.OAuth2AuthenticationProviderUtils;
-import com.toskey.cube.common.security.component.RedisAuthorizationService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
@@ -76,63 +75,68 @@ public class PasswordAuthenticationProvider implements AuthenticationProvider {
             throw new OAuth2AuthenticationException(new OAuth2Error(OAuth2ErrorCodes.INVALID_SCOPE, "The scope is empty.", ERROR_URI));
         }
 
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(passwordAuthenticationToken.getUsername(), passwordAuthenticationToken.getPassword());
-        Authentication passwordAuthentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        try {
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(passwordAuthenticationToken.getUsername(), passwordAuthenticationToken.getPassword());
+            Authentication passwordAuthentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
-        // 构建token
-        // @formatter:off
-        DefaultOAuth2TokenContext.Builder tokenContextBuilder = DefaultOAuth2TokenContext.builder()
-                .registeredClient(registeredClient)
-                .principal(passwordAuthentication)
-                .authorizationServerContext(AuthorizationServerContextHolder.getContext())
-                .authorizedScopes(scopeSet)
-                .authorizationGrantType(AuthorizationGrantType.PASSWORD)
-                .authorizationGrant(passwordAuthenticationToken);
+            // 构建token
+            // @formatter:off
+            DefaultOAuth2TokenContext.Builder tokenContextBuilder = DefaultOAuth2TokenContext.builder()
+                    .registeredClient(registeredClient)
+                    .principal(passwordAuthentication)
+                    .authorizationServerContext(AuthorizationServerContextHolder.getContext())
+                    .authorizedScopes(scopeSet)
+                    .authorizationGrantType(AuthorizationGrantType.PASSWORD)
+                    .authorizationGrant(passwordAuthenticationToken);
 
-        OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient)
-                .principalName(passwordAuthentication.getName())
-                .authorizationGrantType(AuthorizationGrantType.PASSWORD)
-                .authorizedScopes(scopeSet);
+            OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient)
+                    .principalName(passwordAuthentication.getName())
+                    .authorizationGrantType(AuthorizationGrantType.PASSWORD)
+                    .authorizedScopes(scopeSet);
 
-        OAuth2TokenContext tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.ACCESS_TOKEN).build();
-        OAuth2Token generatedAccessToken = this.tokenGenerator.generate(tokenContext);
-        if (generatedAccessToken == null) {
-            OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
-                    "The token generator failed to generate the access token.", ERROR_URI);
-            throw new OAuth2AuthenticationException(error);
-        }
-        if (this.logger.isTraceEnabled()) {
-            this.logger.trace("Generated access token");
-        }
-
-        OAuth2AccessToken accessToken = OAuth2AuthenticationProviderUtils.accessToken(authorizationBuilder,
-                generatedAccessToken, tokenContext);
-
-        // ----- Refresh token -----
-        OAuth2RefreshToken refreshToken = null;
-        // Do not issue refresh token to public client
-        if (registeredClient.getAuthorizationGrantTypes().contains(AuthorizationGrantType.REFRESH_TOKEN)) {
-            tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.REFRESH_TOKEN).build();
-            OAuth2Token generatedRefreshToken = this.tokenGenerator.generate(tokenContext);
-            if (generatedRefreshToken != null) {
-                if (!(generatedRefreshToken instanceof OAuth2RefreshToken oAuth2RefreshToken)) {
-                    OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
-                            "The token generator failed to generate a valid refresh token.", ERROR_URI);
-                    throw new OAuth2AuthenticationException(error);
-                }
-
-                if (this.logger.isTraceEnabled()) {
-                    this.logger.trace("Generated refresh token");
-                }
-
-                refreshToken = oAuth2RefreshToken;
-                authorizationBuilder.refreshToken(refreshToken);
+            OAuth2TokenContext tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.ACCESS_TOKEN).build();
+            OAuth2Token generatedAccessToken = this.tokenGenerator.generate(tokenContext);
+            if (generatedAccessToken == null) {
+                OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
+                        "The token generator failed to generate the access token.", ERROR_URI);
+                throw new OAuth2AuthenticationException(error);
             }
-        }
+            if (this.logger.isTraceEnabled()) {
+                this.logger.trace("Generated access token");
+            }
 
-        OAuth2Authorization authorization = authorizationBuilder.build();
-        authorizationService.save(authorization);
-        return new OAuth2AccessTokenAuthenticationToken(registeredClient, clientPrincipal, accessToken, refreshToken, Objects.requireNonNull(authorization.getAccessToken().getClaims()));
+            OAuth2AccessToken accessToken = OAuth2AuthenticationProviderUtils.accessToken(authorizationBuilder,
+                    generatedAccessToken, tokenContext);
+
+            // ----- Refresh token -----
+            OAuth2RefreshToken refreshToken = null;
+            // Do not issue refresh token to public client
+            if (registeredClient.getAuthorizationGrantTypes().contains(AuthorizationGrantType.REFRESH_TOKEN)) {
+                tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.REFRESH_TOKEN).build();
+                OAuth2Token generatedRefreshToken = this.tokenGenerator.generate(tokenContext);
+                if (generatedRefreshToken != null) {
+                    if (!(generatedRefreshToken instanceof OAuth2RefreshToken oAuth2RefreshToken)) {
+                        OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
+                                "The token generator failed to generate a valid refresh token.", ERROR_URI);
+                        throw new OAuth2AuthenticationException(error);
+                    }
+
+                    if (this.logger.isTraceEnabled()) {
+                        this.logger.trace("Generated refresh token");
+                    }
+
+                    refreshToken = oAuth2RefreshToken;
+                    authorizationBuilder.refreshToken(refreshToken);
+                }
+            }
+
+            OAuth2Authorization authorization = authorizationBuilder.build();
+            authorizationService.save(authorization);
+            return new OAuth2AccessTokenAuthenticationToken(registeredClient, clientPrincipal, accessToken, refreshToken, Objects.requireNonNull(authorization.getAccessToken().getClaims()));
+        } catch (Exception ex) {
+            throw new OAuth2AuthenticationException(new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR),
+                    ex.getLocalizedMessage(), ex);
+        }
     }
 
     @Override

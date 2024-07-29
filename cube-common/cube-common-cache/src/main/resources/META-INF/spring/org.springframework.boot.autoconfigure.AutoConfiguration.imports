@@ -3,6 +3,3 @@ com.toskey.cube.common.cache.config.RedisMessageListenerConfiguration
 com.toskey.cube.common.cache.config.RedisCacheManagerConfiguration
 com.toskey.cube.common.cache.config.RedisCacheAutoConfiguration
 com.toskey.cube.common.cache.config.RedisClearCacheDelayConfiguration
-com.toskey.cube.common.cache.config.RedissonClientProperties
-com.toskey.cube.common.cache.config.RedissonClientConfiguration
-com.toskey.cube.common.cache.config.RedissonLockConfiguration

@@ -1,1 +1,1 @@
-com.toskey.cube.common.log.aspect.CLogAspect
+com.toskey.cube.common.log.aspect.RequestLogAspect
