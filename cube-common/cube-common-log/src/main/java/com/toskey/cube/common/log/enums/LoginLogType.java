@@ -9,7 +9,8 @@ package com.toskey.cube.common.log.enums;
 public enum LoginLogType {
 
     LOGIN("1", "登录"),
-    LOGOUT("2", "注销");
+    LOGOUT("2", "注销"),
+    KICKOUT("3", "踢出");
 
     private final String value;
 

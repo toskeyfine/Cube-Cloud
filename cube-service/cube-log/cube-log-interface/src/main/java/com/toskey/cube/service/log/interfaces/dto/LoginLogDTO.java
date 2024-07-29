@@ -17,8 +17,9 @@ public class LoginLogDTO extends BaseEntityMapper {
     private String id;
 
     /**
-     * 1。登录
-     * 2。注销
+     * 1. 登录
+     * 2. 注销
+     * 3. 踢出
      */
     private String type;
 
