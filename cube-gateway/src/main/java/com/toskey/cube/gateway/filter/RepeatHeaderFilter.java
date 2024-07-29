@@ -14,6 +14,7 @@ import org.springframework.web.server.ServerWebExchange;
  */
 @Component
 public class RepeatHeaderFilter implements HttpHeadersFilter {
+
     @Override
     public HttpHeaders filter(HttpHeaders input, ServerWebExchange exchange) {
         if (CorsUtils.isCorsRequest(exchange.getRequest())) {
@@ -29,4 +30,5 @@ public class RepeatHeaderFilter implements HttpHeadersFilter {
     public boolean supports(Type type) {
         return type.equals(Type.RESPONSE);
     }
+
 }
